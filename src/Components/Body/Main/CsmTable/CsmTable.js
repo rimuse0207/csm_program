@@ -415,7 +415,7 @@ useEffect(() => {
     return (
         <div ref={ScrollUp}>
         <TableContainer ref={handleTableRef}>
-      <Table style={Login_Info.Login_Admin_Access?{maxWidth:"150%",width:"150%"}:{maxWidth:"100%",width:"100%"}} >
+      <Table style={Login_Info.Login_Admin_Access?{maxWidth:"200%",width:"200%"}:{maxWidth:"100%",width:"100%"}} >
         <thead>
           <TableRow>
                         <TableHeader >

@@ -6,7 +6,6 @@ import { Csm_Basic_Data_Change_Checked } from "../../../../../Models/ReduxThunk/
 import moment from 'moment';
 
 const Finall = ({ data }) => {
-    console.log(data);
     const dispatch = useDispatch();
     const Csm_Data = useSelector(state => state.CsmBasicDataReducer.Csm_Basic_Data_State.Csm_Data);
     const Login_Info = useSelector(state => state.LoginInfoDataReducer.Infomation);

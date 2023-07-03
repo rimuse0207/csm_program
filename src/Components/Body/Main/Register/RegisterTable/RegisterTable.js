@@ -19,7 +19,7 @@ import { toast } from "../../../ToastMessage/ToastManager";
 import TextWithHover from "../../../TextHover/TextWithHover";
 import { Csm_Select_Add_Data } from "../../../../../Models/Csm_Select_Reducer/CsmSelectReducer";
 import {useHistory} from 'react-router-dom'
-import { Csm_Filtering_Reset_Data } from "../../../../../Models/Csm_Filtering_Reducer/CSmFilteringReducer";
+import { Csm_Filtering_Reset_Data, initState } from "../../../../../Models/Csm_Filtering_Reducer/CSmFilteringReducer";
 
 const RegisterTable = () => {
     const history = useHistory();
@@ -38,56 +38,6 @@ const RegisterTable = () => {
   const [RightMenuClickKeys, setRightMenuClickKeys] = useState(null);
   const [UpdateModalIsOpen, setUpdateModalIsOpen] = useState(false);
 
-    
-    const Handle_Input_Document_Number = async() => {
-    
-        const Handle_Input_Data = window.prompt("전표번호를 입력 해 주세요.");
-        if (Handle_Input_Data) {
-            alert(`전표번호 : ${Handle_Input_Data}`)
-
-            const Sending_Handle_Input_Document_Number_Axios = await request.post('/CE_Calendar_app_server/Handle_Input_Document_Number', {
-                RightMenuClickKeys,
-                id: Login_Info.Login_id,
-                name: Login_Info.Login_name,
-                Document_Number:Handle_Input_Data
-            });
-            if (Sending_Handle_Input_Document_Number_Axios.data.dataSuccess) {
-                const Change_Data = Csm_Register_State.Regi_Csm_Data.map((list) => list.Main_Data.csm_basic_data_csm_key === RightMenuClickKeys.Main_Data.csm_basic_data_csm_key ? {
-                    ...list,
-                    Main_Data: {
-                        ...list.Main_Data,
-                        csm_basic_data_state: "Close",
-                        csm_finall_id: Login_Info.Login_id,
-                        csm_finall_name: Login_Info.Login_name,
-                        csm_finall_write_date: moment().format("YYYY-MM-DD"),
-                        csm_invoice_list_erp_document_number: Handle_Input_Data
-                    },
-                    Sub_Data: list.Sub_Data.map(item => {
-                        return {
-                            ...item,
-                            csm_finall_id: Login_Info.Login_id,
-                            csm_finall_name: Login_Info.Login_name,
-                            csm_finall_write_date: moment().format("YYYY-MM-DD"),
-                            csm_basic_data_state: "Close",
-                            csm_invoice_list_erp_document_number: Handle_Input_Data
-                        }
-                    })
-                } : list);
-                dispatch(Csm_Register_Data_Change_Checked(Change_Data));
-                toast.show({
-                        title: '전표번호 등록 완료',
-                        content: `${Handle_Input_Data}으로 전표번호를 등록 처리하였습니다.`,
-                        duration: 6000,
-                        successCheck: true,
-                });
-                handleMenuClose();
-            }
-            
-        } else {
-            alert(`Nothing`)
-        }
-    }
-    
     
     
     const handle_Delete_Complete_Data_Confirm_Checking = async() => {
@@ -251,13 +201,13 @@ useEffect(() => {
     }
 
     useEffect(() => {
+        // dispatch(Csm_Filtering_Reset_Data());
         dispatch(Csm_Register_Data_Reduce_Thunk(1, Csm_Filter_State, Csm_Invoice_Select_State))
-        dispatch(Csm_Filtering_Reset_Data());
     },[])
 
     return (
          <TableContainer ref={handleTableRef}>
-                <Table style={Login_Info.Login_Admin_Access?{width:"150%",maxWidth:"150%"}:{width:"100%",maxWidth:"100%"}}>
+                <Table style={Login_Info.Login_Admin_Access?{width:"200%",maxWidth:"200%"}:{width:"100%",maxWidth:"100%"}}>
                     <thead>
                     <TableRow>
                         {Login_Info.Login_Admin_Access ? <TableHeader >
@@ -286,13 +236,13 @@ useEffect(() => {
                                     <TableHeader>숙박비용</TableHeader>
                                     <TableHeader>작업비용</TableHeader>
                                     <TableHeader>총 비용</TableHeader></>:<></>}
-                                    <TableHeader style={{borderLeft:"1px solid lightgray"}}>발행</TableHeader>
+                                    <TableHeader style={{borderLeft:"2px solid gray"}}>발행</TableHeader>
                                     <TableHeader>Part 발주 요청</TableHeader>
                                     <TableHeader>Part 입고</TableHeader>
                                     <TableHeader>Part 수령</TableHeader>
                                     <TableHeader>작업완료</TableHeader>
                                     <TableHeader>인보이스발행</TableHeader>
-                                      <TableHeader>완료</TableHeader>
+                                      <TableHeader style={{borderRight:"2px solid gray"}}>완료</TableHeader>
                         <TableHeader>비고</TableHeader>
                     </TableRow>
                     </thead>
@@ -359,7 +309,7 @@ useEffect(() => {
                                                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</TableData>
                                     </>:<></>}
                                 
-                                <TableData>
+                                <TableData style={{borderLeft:"2px solid gray"}}>
                                     <Publish data={item}></Publish>
                                 </TableData>
                                 <TableData>
@@ -379,7 +329,7 @@ useEffect(() => {
                                     <TableData  rowSpan={list.Sub_Data.length  }>
                                         <Pay data={list.Main_Data}></Pay>
                                     </TableData>
-                                    <TableData  rowSpan={list.Sub_Data.length   }>
+                                    <TableData  rowSpan={list.Sub_Data.length   } style={{borderRight:"2px solid gray"}}>
                                         <Finall data={list.Main_Data}></Finall>
                                     </TableData>
 
@@ -408,7 +358,7 @@ useEffect(() => {
                      {RightMenuIsOpen ? <div className="Right_Menu_Container" style={{position:"fixed",top:`${RightMenuPosition.y}px`,left:`${RightMenuPosition.x}px`}} >
                 <ul>               
                             {RightMenuClickKeys.Main_Data.csm_pay_id  ? <li style={{opacity:"0.5"}}>사용자 등록 취소</li>:<li onClick={()=>handle_Delete_Complete_Data_Confirm_Checking()}>사용자 등록 취소</li>} 
-                               {RightMenuClickKeys.Main_Data.csm_invoice_list_registration_key  ? <li onClick={()=>Handle_Input_Document_Number()}>전표번호 작성</li>:<></>} 
+                           
                             </ul>
                           </div>:<div></div>}
 

@@ -34,7 +34,7 @@ Modal.setAppElement('#FilterSearchModal');
 
 
 const FilterSelectMainDivBox = styled.div`
-    
+    margin-top:30px;
 `
 
 export const FilterSearchMainPageDivBox = styled.div`

@@ -99,18 +99,18 @@ const InvoiceSelectTable = () => {
                                      <TableData  rowSpan={list.Sub_Data.length + LengthCount  }>{ item.csm_user_input_data_travel_range}</TableData>
                                     <TableData  rowSpan={list.Sub_Data.length + LengthCount}>{ item.csm_user_input_data_travel_time}</TableData>
                                     <TableData  rowSpan={list.Sub_Data.length +LengthCount  }>{item.csm_user_input_data_stay_days}</TableData>
-                                        <TableData  rowSpan={list.Sub_Data.length +LengthCount }>{item.csm_user_input_data_travel_range_cost?.toString()
+                                        <TableData  rowSpan={list.Sub_Data.length +LengthCount }>￥{item.csm_user_input_data_travel_range_cost?.toString()
                                                                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</TableData>
-                                    <TableData  rowSpan={list.Sub_Data.length +LengthCount}>{ item.csm_user_input_data_travel_time_cost?.toString()
+                                    <TableData  rowSpan={list.Sub_Data.length +LengthCount}>￥{ item.csm_user_input_data_travel_time_cost?.toString()
                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</TableData>
-                                    <TableData  rowSpan={list.Sub_Data.length +LengthCount}>{ item.csm_user_input_data_stay_days_cost?.toString()
+                                    <TableData  rowSpan={list.Sub_Data.length +LengthCount}>￥{ item.csm_user_input_data_stay_days_cost?.toString()
                                                                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</TableData>
 
                                 </> : <></>}
 
-                                    <TableData>{ item.csm_user_input_data_operation_cost?.toString()
+                                    <TableData>￥{ item.csm_user_input_data_operation_cost?.toString()
                                                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</TableData>
-                                    <TableData >￥{  item.csm_user_input_data_total_cost?.toString()
+                                    <TableData >￥{  (item.csm_user_input_data_total_cost -item.csm_user_input_data_travel_range_cost -item.csm_user_input_data_travel_time_cost-item.csm_user_input_data_stay_days_cost)?.toString()
                                                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</TableData>
                                     </>:<></>}
                                 
