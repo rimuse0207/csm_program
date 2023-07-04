@@ -13,6 +13,7 @@ import {toast} from "../../ToastMessage/ToastManager"
 
 const CsmAddModalMainDivBox = styled.div`
      position:relative;
+     font-size:0.6em;
     .Close_Modal{
         position:absolute;
         top:0px;

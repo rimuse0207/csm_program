@@ -4,6 +4,7 @@ import { request } from "../../../../../APIs";
 import { useDispatch, useSelector } from "react-redux";
 import { Csm_Basic_Data_Change_Checked } from "../../../../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer"
 import moment from "moment";
+import { toast } from "../../../ToastMessage/ToastManager";
 
 const Entering = ({ data }) => {
    const dispatch = useDispatch();
@@ -21,8 +22,15 @@ const Login_Info = useSelector(state => state.LoginInfoDataReducer.Infomation);
                         
             if (Calendar_Button_Click_Axios.data.dataSuccess) {
                 
-                const Update_Data_Key = Csm_Data.map((list) => list.csm_basic_data_csm_key === data.csm_basic_data_csm_key ? { ...list,csm_entering_id:Login_Info.Login_id,csm_entering_name:Login_Info.Login_name } : list );
+                const Update_Data_Key = Csm_Data.map((list) => list.csm_basic_data_csm_key === data.csm_basic_data_csm_key ? { ...list,csm_entering_id:Login_Info.Login_id,csm_entering_name:Login_Info.Login_name,csm_entering_csm_key:data.csm_basic_data_csm_key,csm_entering_write_date:moment().format("YYYY-MM-DD") } : list );
                 dispatch(Csm_Basic_Data_Change_Checked(Update_Data_Key))
+            }else {
+                toast.show({
+                    title: 'Part 입고 처리 ERROR',
+                    content: `IT팀에 문의 바랍니다.`,
+                    duration: 6000,
+                    successCheck: false,
+                    })
             }
 
         } catch (error) {

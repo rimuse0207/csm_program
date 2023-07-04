@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Navigation from "../Nav/Navigation"
 import CsmTable from "./CsmTable/CsmTable";
 import FilterSelect from "./Filter/FilterSelect";
@@ -14,6 +14,7 @@ import Modal from "react-modal";
 import { RiFileExcel2Fill } from "react-icons/ri";
 import { request } from "../../../APIs";
 import GraphMainPage from "../Graph/GraphMainPage"
+import moment from "moment";
 
 const customStyles = {
     content: {
@@ -87,6 +88,9 @@ const MainPage = () => {
     const Csm_Select_Data = useSelector((state) => state.CsmSelectReducer.Csm_Select_Data);
     const [FloatingMenuChecking, setFloatingMenuChecking] = useState(true);
     const [CsmAddModalISOpen, setCsmAddModalISOpen] = useState(false);
+    const [Grinder_Data, setGrinder_Data] = useState([]);
+    const [Laser_Data, setLaser_Data] = useState([]);
+    const [Dicer_Data, setDicer_Data] = useState([]);
 
     const HandleExcelDownload = async() => {
         try {
@@ -102,10 +106,45 @@ const MainPage = () => {
         }
     }
 
+    const Division_Goals_Graph_Data = async () => { 
+        try {
+            
+            const Division_Goals_Graph_Data_Axios = await request.get(`/CE_Calendar_app_server/Division_Goals_Graph_Data`, {
+                params: {
+                    Select_Date:moment().format("YYYY")
+                }
+            })
+
+            if (Division_Goals_Graph_Data_Axios.data.dataSuccess) {
+                const Grinder_Datas = Division_Goals_Graph_Data_Axios.data.Grinder.map((list) => {
+                    return list.total_orders
+                })
+                const Laser_Datas = Division_Goals_Graph_Data_Axios.data.Laser.map((list) => {
+                    return list.total_orders
+                })
+                const Dicer_Datas = Division_Goals_Graph_Data_Axios.data.Dicer.map((list) => {
+                    return list.total_orders
+                })
+                setGrinder_Data(Grinder_Datas)
+                setLaser_Data(Laser_Datas)
+                setDicer_Data(Dicer_Datas)
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    useEffect(() => {
+        Division_Goals_Graph_Data(); 
+    },[])
+
+
     return (
         <MainPageMainDivBox>
             <Navigation></Navigation>
-            <GraphMainPage></GraphMainPage>
+            <GraphMainPage Grinder_Datas={Grinder_Data} Laser_Datas={Laser_Data} Dicer_Datas={Dicer_Data}></GraphMainPage>
             <FilterSelect></FilterSelect>
             <CsmTable></CsmTable>
              <div className="FloatingMenu_Container" >

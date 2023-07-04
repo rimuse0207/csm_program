@@ -58,6 +58,7 @@ export const FilterSearchMainPageDivBox = styled.div`
             height: 40px;
             margin-left: 20px;
             margin-bottom: 10px;
+            margin-top:20px;
             .SearchInputContainerTitle {
                 margin-right: 10px;
                 line-height: 40px;

@@ -4,45 +4,53 @@ import { request } from "../../../../../APIs";
 import { useDispatch, useSelector } from "react-redux";
 import { Csm_Basic_Data_Change_Checked } from "../../../../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer"
 import moment from 'moment';
+import { toast } from "../../../ToastMessage/ToastManager";
 
 const Custom = ({ data}) => {
     const dispatch = useDispatch();
     const Csm_Data = useSelector(state => state.CsmBasicDataReducer.Csm_Basic_Data_State.Csm_Data);
             const Login_Info = useSelector(state => state.LoginInfoDataReducer.Infomation);
 
-   const handleClickButton = async() => {
-        try {
-            const Calendar_Button_Click_Axios =await request.post(`${process.env.REACT_APP_DB_HOST}/CE_Calendar_app_server/Calendar_Button_Click`, {
-                data,
-                Click_Item: "csm_custom",
-                id: Login_Info.Login_id,
-                name:Login_Info.Login_name
-            })
+//    const handleClickButton = async() => {
+//         try {
+//             const Calendar_Button_Click_Axios =await request.post(`${process.env.REACT_APP_DB_HOST}/CE_Calendar_app_server/Calendar_Button_Click`, {
+//                 data,
+//                 Click_Item: "csm_custom",
+//                 id: Login_Info.Login_id,
+//                 name:Login_Info.Login_name
+//             })
                         
-            if (Calendar_Button_Click_Axios.data.dataSuccess) {
+//             if (Calendar_Button_Click_Axios.data.dataSuccess) {
                 
-                const Update_Data_Key = Csm_Data.map((list) => list.csm_basic_data_csm_key === data.csm_basic_data_csm_key ? { ...list,csm_custom_id:Login_Info.Login_id,csm_custom_name: Login_Info.Login_name} : list );
-                dispatch(Csm_Basic_Data_Change_Checked(Update_Data_Key))
-            }
+//                 const Update_Data_Key = Csm_Data.map((list) => list.csm_basic_data_csm_key === data.csm_basic_data_csm_key ? { ...list,csm_custom_id:Login_Info.Login_id,csm_custom_name: Login_Info.Login_name,csm_custom_csm_key:data.csm_basic_data_csm_key } : list );
+//                 dispatch(Csm_Basic_Data_Change_Checked(Update_Data_Key))
+//             }else {
+//                 toast.show({
+//                     title: '작업완료 처리 ERROR',
+//                     content: `IT팀에 문의 바랍니다.`,
+//                     duration: 6000,
+//                     successCheck: false,
+//                     })
+//             }
 
-        } catch (error) {
-            console.log(error);
-        }
-    }
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
 
-    const user_Info_Check = async() => {
-        try {
+//     const user_Info_Check = async() => {
+//         try {
             
-        } catch (error) {
-            console.log(error);
-        }
-    }
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
 
-    useEffect(() => {
-        if (data.csm_custom_id) {
-            user_Info_Check()
-        }
-    },[data])
+//     useEffect(() => {
+//         if (data.csm_custom_id) {
+//             user_Info_Check()
+//         }
+//     },[data])
 
     return (
         <PublishMainDivBox>

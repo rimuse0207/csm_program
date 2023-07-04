@@ -40,7 +40,7 @@ Modal.setAppElement('#FilterSearchModal');
 export const TableContainer = styled.div`
   /* max-height: 80vh; */
   overflow-y: auto;
-  max-height: 90vh;
+  /* max-height: 90vh; */
   .Hidden_Checking{
     opacity:0.5;
   }
