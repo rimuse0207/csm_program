@@ -18,6 +18,7 @@ import moment from 'moment';
 import { FiSettings } from "react-icons/fi";
 import Modal from "react-modal";
 import GoalsChangeModal from './Change_Modal/GoalsChangeModal';
+import { useSelector } from 'react-redux';
 
 const customStyles = {
     content: {
@@ -139,19 +140,21 @@ export const Dicer_Options = {
      maintainAspectRatio:false
 };
 
-const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas }) => {
+const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_Data,Laser_Goals_Data,Dicer_Goals_Data,Division_Goals_Graph_Data }) => {
+  const Login_Info = useSelector((state) => state.LoginInfoDataReducer.Infomation);
   const [Select_Years,setSelect_Years] = useState(moment().format("YYYY"))
   const [Goals_Change_Modal_IsOpen, setGoals_Change_Modal_IsOpen] = useState(false);
   const [Select_Teams, setSelect_Teams] = useState(null);
   const Goals_Change_Modal_Close = () => {
     setGoals_Change_Modal_IsOpen(false)
+     document.body.style.overflow = 'auto';
   }
 
   const Handle_Goals_Change = (Select_Team) => {
-    try {
-      console.log(Select_Team);      
+    try {        
       setSelect_Teams(Select_Team)
       setGoals_Change_Modal_IsOpen(true);
+       document.body.style.overflow = 'hidden';
     } catch (error) {
       console.log(error);
     }
@@ -170,7 +173,7 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas }) => {
     {
        type:'line',
           label: 'GRINDER 목표치',
-      data: ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'],
+      data:Grinder_Goals_Data,
           borderColor:'rgb(75, 192, 192)',
           backgroundColor: 'rgb(75, 192, 192)',
     },
@@ -191,7 +194,7 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas }) => {
     }, {
       type:'line',
       label: 'DICER 목표치',
-      data: ['21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
+      data:Dicer_Goals_Data,
       borderColor:'rgba(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235)',
     },
@@ -212,7 +215,7 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas }) => {
       
          type:'line',
       label: 'LASER 목표치',
-      data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+      data: Laser_Goals_Data,
          borderColor:'rgba(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132)',
       },
@@ -225,28 +228,30 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas }) => {
               <div className="Chart_Sub_Container">
                 <h5>GRINDER</h5>
                 <Chart type="bar" options={Grinder_Options} data={Grinder_Data} width="30vw" />
-                <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Grinder")}>
+            { Login_Info.Login_Admin_Access ? <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Grinder")}>
                   <FiSettings></FiSettings>
-                </div>
+                </div>:<></>}
               </div>
               <div className="Chart_Sub_Container">
                 <h5>DICER</h5>
-                <Chart type="bar" options={Dicer_Options} data={Dicer_Data} width="30vw" />
-                <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Dicer")}>
+            <Chart type="bar" options={Dicer_Options} data={Dicer_Data} width="30vw" />
+            { Login_Info.Login_Admin_Access ? <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Dicer")}>
                   <FiSettings></FiSettings>
-                </div>
+                </div>:<></>}
+                
               </div>
               <div className="Chart_Sub_Container">
                 <h5>LASER</h5>
-                <Chart type="bar" options={Laser_Options} data={Laser_Data} width="30vw" />
-                <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Laser")}>
+            <Chart type="bar" options={Laser_Options} data={Laser_Data} width="30vw" />
+              { Login_Info.Login_Admin_Access ? <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Laser")}>
                   <FiSettings></FiSettings>
-                </div>
+                </div>:<></>}
+               
               </div>
               
             </div>
             <Modal isOpen={Goals_Change_Modal_IsOpen} style={customStyles} onRequestClose={()=>Goals_Change_Modal_Close()} >
-                  <GoalsChangeModal Goals_Change_Modal_Close={()=>Goals_Change_Modal_Close()} Select_Teams={Select_Teams} Select_Years={Select_Years}></GoalsChangeModal>
+                  <GoalsChangeModal Goals_Change_Modal_Close={()=>Goals_Change_Modal_Close()} Select_Teams={Select_Teams} Select_Years={Select_Years} Division_Goals_Graph_Data={()=>Division_Goals_Graph_Data()}></GoalsChangeModal>
             </Modal>
         
         </GraphMainPageMainDivBox>

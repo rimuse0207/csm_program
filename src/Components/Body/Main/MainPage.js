@@ -89,8 +89,11 @@ const MainPage = () => {
     const [FloatingMenuChecking, setFloatingMenuChecking] = useState(true);
     const [CsmAddModalISOpen, setCsmAddModalISOpen] = useState(false);
     const [Grinder_Data, setGrinder_Data] = useState([]);
+    const [Grinder_Goals_Data, setGrinder_Goals_Data] = useState([]);
     const [Laser_Data, setLaser_Data] = useState([]);
+    const [Laser_Goals_Data, setLaser_Goals_Data] = useState([]);
     const [Dicer_Data, setDicer_Data] = useState([]);
+    const [Dicer_Goals_Data, setDicer_Goals_Data] = useState([]);
 
     const HandleExcelDownload = async() => {
         try {
@@ -125,9 +128,21 @@ const MainPage = () => {
                 const Dicer_Datas = Division_Goals_Graph_Data_Axios.data.Dicer.map((list) => {
                     return list.total_orders
                 })
+                const Grinder_Goals_Datas = Division_Goals_Graph_Data_Axios.data.Grinder_Goals.map((list) => {
+                    return list.goals
+                })
+                 const Dicer_Goals_Datas = Division_Goals_Graph_Data_Axios.data.Dicer_Goals.map((list) => {
+                    return list.goals
+                })
+                 const Laser_Goals_Datas = Division_Goals_Graph_Data_Axios.data.Laser_Goals.map((list) => {
+                    return list.goals
+                })
                 setGrinder_Data(Grinder_Datas)
+                setGrinder_Goals_Data(Grinder_Goals_Datas)
                 setLaser_Data(Laser_Datas)
+                setLaser_Goals_Data(Laser_Goals_Datas)
                 setDicer_Data(Dicer_Datas)
+                setDicer_Goals_Data(Dicer_Goals_Datas)
             }
 
         } catch (error) {
@@ -144,7 +159,7 @@ const MainPage = () => {
     return (
         <MainPageMainDivBox>
             <Navigation></Navigation>
-            <GraphMainPage Grinder_Datas={Grinder_Data} Laser_Datas={Laser_Data} Dicer_Datas={Dicer_Data}></GraphMainPage>
+            <GraphMainPage Grinder_Datas={Grinder_Data} Laser_Datas={Laser_Data} Dicer_Datas={Dicer_Data} Grinder_Goals_Data={Grinder_Goals_Data} Laser_Goals_Data={Laser_Goals_Data} Dicer_Goals_Data={Dicer_Goals_Data} Division_Goals_Graph_Data={()=>Division_Goals_Graph_Data()}></GraphMainPage>
             <FilterSelect></FilterSelect>
             <CsmTable></CsmTable>
              <div className="FloatingMenu_Container" >
