@@ -67,12 +67,12 @@ const CustomModal = ({ setNotCustomModalIsOpen }) => {
             })
             if (Registered_Custom_Data_Axios.data.dataSuccess) {
                 if (Registered_Custom_Data_Axios.data.RequestDBInsertChecking) {
-            toast.show({
-                title: '고객사 등록 요청 발신 완료.',
-                content: `요청 하신 고객사 정보를 담당자에게 요청하였습니다. 담당자가 등록이 완료 후에 다시 등록 바랍니다.`,
-                duration: 6000,
-                successCheck: true,
-           }); 
+                        toast.show({
+                            title: '고객사 등록 요청 발신 완료.',
+                            content: `요청 하신 고객사 정보를 담당자에게 요청하였습니다. 담당자가 등록이 완료 후에 다시 등록 바랍니다.`,
+                            duration: 6000,
+                            successCheck: true,
+                    }); 
                 } else {
                     dispatch(Csm_User_Input_Change_Data({
                         ...Csm_User_Input_Data,

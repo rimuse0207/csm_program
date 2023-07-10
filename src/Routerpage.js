@@ -10,6 +10,9 @@ import SelectCsmTable from './Components/Body/Main/CsmTable/Select_Csm_Table/Sel
 import DistanceMainPage from './Components/Body/Main/Distance/DistanceMainPage';
 import InoviceInputMainPage from './Components/Body/Main/InvoiceInput/InoviceInputMainPage';
 import InvoiceTableMainPage from './Components/Body/Main/InvoiceTable/InvoiceTableMainPage';
+import RequestDistance from './Components/Body/Main/Distance/RequestDistance/RequestDistance';
+import DistanceUpdatePage from './Components/Body/Main/Distance/DistanceTable/DistanceUpdatePage';
+import ExcelUpload from './Components/Body/Main/ExcelUpload/ExcelUpload';
 const Routerpage = () => {
   const loading = useSelector(state => state.LoaderCheckingRedux.loading);
    const Login_Info = useSelector((state) => state.LoginInfoDataReducer.Infomation);
@@ -30,8 +33,10 @@ const Routerpage = () => {
           <Route exact path='/Csm_Invoice_Pay_Finished' component={InvoiceTableMainPage}></Route>
 
 
-          <Route path="/Csm_Basic_Excel_Upload" component={CsmBasicExcelUpload}></Route>
-          <Route path="/Distacne_Data" component={DistanceMainPage}></Route>
+          <Route path="/Csm_Basic_Excel_Upload" component={ExcelUpload}></Route>
+            <Route exact path="/Distacne_Data" component={DistanceMainPage}></Route>
+            <Route path="/Distacne_Data/:start_location/:custommer_name/:custommer_area" component={DistanceUpdatePage}></Route>
+            <Route path="/Distacne/request" component={RequestDistance}></Route>
           <Redirect to="/" />
           </>:<><Redirect to="/Login" /></>}
          

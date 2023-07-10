@@ -41,6 +41,7 @@ export const TableContainer = styled.div`
   /* max-height: 80vh; */
   overflow-y: auto;
   /* max-height: 90vh; */
+    min-height:50vh;
   .Hidden_Checking{
     opacity:0.5;
   }
@@ -142,6 +143,7 @@ export const TableRow = styled.tr`
 `;
 
 const CsmTable = () => {
+  const Handle_scroll_Up = useRef();
   const handleTableRef = useRef();
   const ScrollUp = useRef();
   const dispatch = useDispatch()
@@ -274,6 +276,7 @@ const CsmTable = () => {
         })
           setRightMenuClickKeys(null);
           setRightMenuIsOpen(false);
+            document.body.style.overflow = 'auto';
         return;
       } else {
 
@@ -403,6 +406,10 @@ useEffect(() => {
   useEffect(() => {
     /// 페이지 변경 시 마다
     Table_Axios();
+     window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+                });
   }, [PageNumbers])
   
   useEffect(() => {
@@ -413,10 +420,10 @@ useEffect(() => {
 
 
     return (
-        <div ref={ScrollUp}>
+        <div ref={ScrollUp} id="target-section" >
         <TableContainer ref={handleTableRef}>
       <Table style={Login_Info.Login_Admin_Access?{maxWidth:"200%",width:"200%"}:{maxWidth:"100%",width:"100%"}} >
-        <thead>
+        <thead >
           <TableRow>
                         <TableHeader >
                             <div>선택</div>
@@ -428,17 +435,17 @@ useEffect(() => {
                         <TableHeader>CSM</TableHeader>
                         <TableHeader>MODEL</TableHeader>
                         <TableHeader>제번</TableHeader>
-                        <TableHeader>최초 납품처</TableHeader>
+                        <TableHeader>최초<br/>납품처</TableHeader>
                         {/* <TableHeader>Part<br/> 유무</TableHeader> */}
                         
                 
                 {Login_Info.Login_Admin_Access ? <>
-                  <TableHeader>작업자 이름</TableHeader>
+                  <TableHeader>작업자<br/>이름</TableHeader>
                           <TableHeader>이동거리</TableHeader>
                         <TableHeader>이동시간</TableHeader>
                 <TableHeader>숙박일수</TableHeader>
-                  <TableHeader>이동거리 비용</TableHeader>
-                        <TableHeader>이동시간 비용</TableHeader>
+                  <TableHeader>이동거리<br/>비용</TableHeader>
+                        <TableHeader>이동시간<br/>비용</TableHeader>
                         <TableHeader>숙박비용</TableHeader>
                         <TableHeader>작업비용</TableHeader>
                         <TableHeader>총 비용</TableHeader></>:<></>}
@@ -463,11 +470,13 @@ useEffect(() => {
         </thead>
         <tbody>
                     {Csm_Data.map((list,j) => {
-                        return <TableRow key={list.csm_basic_data_csm_key} onContextMenu={(e)=>handleContextMenu(e,list)} onClick={handleMenuClose} style={RightMenuClickKeys?.csm_basic_data_csm_key === list.csm_basic_data_csm_key ? {}:RightMenuIsOpen?{opacity:"0.4"}:{}} className={`${list.csm_basic_data_view_hidde_check === 1?"Hidden_Checking":""}`} >
-                          <TableData ><input type="checkbox" onClick={(e) => HandleCheckData(e, list)} checked={list.checked === "TRUE" || list.checked === true ? true : false}
+                        return <TableRow ref={Handle_scroll_Up} key={list.csm_basic_data_csm_key} onContextMenu={(e)=>handleContextMenu(e,list)} onClick={handleMenuClose} style={RightMenuClickKeys?.csm_basic_data_csm_key === list.csm_basic_data_csm_key ? {}:RightMenuIsOpen?{opacity:"0.4"}:{}} className={`${list.csm_basic_data_view_hidde_check === 1?"Hidden_Checking":""}`} >
+                          <TableData >
+                            <input type="checkbox" onClick={(e) => HandleCheckData(e, list)} checked={list.checked === "TRUE" || list.checked === true ? true : false}
                             disabled={(list.csm_publish_id && list.csm_apply_id && list.csm_entering_id && list.csm_ce_id) && !list.csm_user_input_data_writer_id ? false : true}
                             style={(list.csm_publish_id && list.csm_apply_id && list.csm_entering_id && list.csm_ce_id) && !list.csm_user_input_data_writer_id ?{}:{opacity:0.2}}
-                            readOnly></input></TableData>
+                              readOnly></input>
+                          </TableData>
                             {/* <TableData  >{ j+1}</TableData> */}
                             <TableData>{list.csm_basic_data_state}</TableData>
                             <TableData>{ list.csm_basic_data_grade}</TableData>
@@ -556,7 +565,8 @@ useEffect(() => {
                           </div>:<div></div>}
         </tbody>
       </Table>
-            </TableContainer>
+        </TableContainer>
+        <div style={{marginTop:"50px"}}></div>
         <PageNation totalPagesss={totalPages} setCurrentPage={(data) => setPageNumbers(data)} currentPage={PageNumbers}></PageNation>
          <Modal isOpen={UpdateModalIsOpen} style={customStyles} onRequestClose={()=>Csm_Basic_Data_Update_Modal_Close()} >
                   <CsmUpdateModal RightMenuClickKeys={RightMenuClickKeys} Csm_Basic_Data_Update_Modal_Close={()=>Csm_Basic_Data_Update_Modal_Close()}></CsmUpdateModal>

@@ -136,7 +136,7 @@ const CsmBasicExcelUpload = () => {
 
     return (
         <CsmBasicExcelUploadMainDivBox>
-            <Navigation></Navigation>
+            {/* <Navigation></Navigation> */}
             <div style={{paddingLeft:"40px"}}>
             <h3>CSM 정보 업로드</h3>
             <div className="upload-file-wrapper">

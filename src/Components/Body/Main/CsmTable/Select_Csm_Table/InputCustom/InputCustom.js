@@ -43,7 +43,7 @@ const InputCustom = () => {
     //초기 렌더링 ( 고객사명 불러오기 )
     useEffect(() => {
         dispatch(Csm_User_Input_Change_Custom_Data_Redux_Thunk(Csm_User_Input_Data.location_checked === "Pangyo"?"판교":"아산"))
-    }, []);
+    }, [Csm_User_Input_Data.location_checked]);
 
 
     return (

@@ -23,7 +23,14 @@ const Apply = ({ data}) => {
             if (Calendar_Button_Click_Axios.data.dataSuccess) {
                 
                 const Update_Data_Key = Csm_Data.map((list) => list.csm_basic_data_csm_key === data.csm_basic_data_csm_key ? { ...list,csm_apply_id:Login_Info.Login_id,csm_apply_name: Login_Info.Login_name,csm_apply_csm_key:data.csm_basic_data_csm_key,csm_apply_write_date:moment().format("YYYY-MM-DD")} : list );
-                dispatch(Csm_Basic_Data_Change_Checked(Update_Data_Key))
+                dispatch(Csm_Basic_Data_Change_Checked(Update_Data_Key));
+
+                toast.show({
+                    title: 'Part 발주 요청 처리하였습니다.',
+                    content: `발주 요청메일을 '이용석 프로'에게 전달 하였습니다. `,
+                    duration: 6000,
+                    successCheck: true,
+                    })
             } else {
                 toast.show({
                     title: 'Part 발주 요청 처리 ERROR',

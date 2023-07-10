@@ -4,7 +4,6 @@ import Navigation from "../../Nav/Navigation";
 import DistanceTable from "./DistanceTable/DistanceTable";
 
 const DistanceMainPageMainDivBox = styled.div`
-    border:1px solid black;
     font-size:0.8em;
 `
 
@@ -13,6 +12,7 @@ const DistanceMainPage = () => {
         <DistanceMainPageMainDivBox>
             <Navigation></Navigation>
             <DistanceTable></DistanceTable>
+            <div style={{marginTop:"20px"}}></div>
         </DistanceMainPageMainDivBox>
     )
 }

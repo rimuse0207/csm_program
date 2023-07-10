@@ -5,12 +5,14 @@ import moment from 'moment';
 import { BsFillInfoSquareFill } from "react-icons/bs";
 import { useDispatch } from 'react-redux';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../../../Models/LoaderCheckReducer/LoaderCheckReducer';
+import { useHistory } from 'react-router-dom';
 
 const DistanceTableMainDivBox = styled.div`
      table {
         border-collapse: separate;
         border-spacing: 0;
         width: 100%;
+        font-size:1.2em;
     }
     th,
     td {
@@ -51,7 +53,10 @@ const DistanceTableMainDivBox = styled.div`
                  .Nav_Border_Container{
                     margin-top:5px;
                     border:1px solid #368;
+                  
                 }
+                  font-weight:bolder;
+                    font-size:1.1em;
                 opacity:1;
                 color:#368;
             }
@@ -72,9 +77,16 @@ const DistanceTableMainDivBox = styled.div`
         }
     }
 
+
+.Info_Icons{
+    :hover{
+        cursor: pointer;
+    }
+}
 `
 
 const DistanceTable = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [DistanceData, setDistanceData] = useState([]);
     const [Distance_Nav, setDistance_Nav] = useState([
@@ -86,11 +98,18 @@ const DistanceTable = () => {
             nav_name: "아산",
             nav_check:false
         },
-         {
-            nav_name: "사용자 등록 요청 LIST",
-            nav_check:false
-        }
+        
     ])
+
+
+    const HandleChangeDistanceData = (data) => {
+        try {
+            history.push(`/Distacne_Data/${data.csm_distance_lists_location}/${data.csm_distance_lists_custommer}/${data.csm_distance_lists_area}`)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
     const HandleNavChange = (list) => {
@@ -161,11 +180,11 @@ const DistanceTable = () => {
                                 <td style={{ fontWeight: 'bold' }}>{i + 1}</td>
                                 <td>{list.csm_distance_lists_area}</td>
                                 <td>{list.csm_distance_lists_custommer}</td>
-                                <td>{list.csm_distance_lists_distance}</td>
-                                <td>{list.csm_distance_lists_distance_time}</td>
+                                <td>{list.csm_distance_lists_distance} KM</td>
+                                <td>{list.csm_distance_lists_distance_time} 시간</td>
                                 <td>{list.name}</td>
                                 <td>{moment(list.csm_distance_lists_write_date).format('YYYY-MM-DD')}</td>
-                                <td className="Info_Icons" >
+                                <td className="Info_Icons" onClick={()=>HandleChangeDistanceData(list)} >
                                     <BsFillInfoSquareFill></BsFillInfoSquareFill>
                                 </td>
                             </tr>

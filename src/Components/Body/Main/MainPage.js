@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState ,useEffect, useRef} from "react";
 import Navigation from "../Nav/Navigation"
 import CsmTable from "./CsmTable/CsmTable";
 import FilterSelect from "./Filter/FilterSelect";
@@ -15,6 +15,8 @@ import { RiFileExcel2Fill } from "react-icons/ri";
 import { request } from "../../../APIs";
 import GraphMainPage from "../Graph/GraphMainPage"
 import moment from "moment";
+import { ImArrowUp } from "react-icons/im";
+import { confirmAlert } from 'react-confirm-alert'; 
 
 const customStyles = {
     content: {
@@ -84,6 +86,7 @@ const MainPageMainDivBox = styled.div`
 `
 
 const MainPage = () => {
+    const HandleScrollUp = useRef(null);
     const Login_Info = useSelector((state) => state.LoginInfoDataReducer.Infomation);
     const Csm_Select_Data = useSelector((state) => state.CsmSelectReducer.Csm_Select_Data);
     const [FloatingMenuChecking, setFloatingMenuChecking] = useState(true);
@@ -95,8 +98,42 @@ const MainPage = () => {
     const [Dicer_Data, setDicer_Data] = useState([]);
     const [Dicer_Goals_Data, setDicer_Goals_Data] = useState([]);
 
-    const HandleExcelDownload = async() => {
-        try {
+
+    const ScrollUp = () => {
+        if (HandleScrollUp.current) {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+                });
+        }
+    }   
+
+    const HandleExcelDownload = async () => {
+
+        confirmAlert({
+            title: `CSM Excel 다운로드`,
+            message: `CSM의 모든 데이터를 다운받으시겠습니까?`,
+            buttons: [
+                {
+                label: '예',
+                    onClick: async() => {
+                    await Handle_Download_Data()
+                 }
+                },
+                {
+                label: '아니오',
+                onClick: () => {}
+                }
+            ]
+            });
+
+
+
+    }
+
+
+    const Handle_Download_Data = async () => {
+            try {
             
             const HandleExcelDownload_Axios = await request.get(`/CE_Calendar_app_server/CSM_Excel_Download`)
 
@@ -107,7 +144,15 @@ const MainPage = () => {
         } catch (error) {
             console.log(error);
         }
+
     }
+
+
+
+
+
+
+
 
     const Division_Goals_Graph_Data = async () => { 
         try {
@@ -157,11 +202,11 @@ const MainPage = () => {
 
 
     return (
-        <MainPageMainDivBox>
+        <MainPageMainDivBox ref={HandleScrollUp}>
             <Navigation></Navigation>
             <GraphMainPage Grinder_Datas={Grinder_Data} Laser_Datas={Laser_Data} Dicer_Datas={Dicer_Data} Grinder_Goals_Data={Grinder_Goals_Data} Laser_Goals_Data={Laser_Goals_Data} Dicer_Goals_Data={Dicer_Goals_Data} Division_Goals_Graph_Data={()=>Division_Goals_Graph_Data()}></GraphMainPage>
             <FilterSelect></FilterSelect>
-            <CsmTable></CsmTable>
+            <CsmTable ></CsmTable>
              <div className="FloatingMenu_Container" >
                         <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuChecking}>
                             <MainButton
@@ -217,6 +262,18 @@ const MainPage = () => {
                                                             
                                     />
                                 : <></>}
+                         { <ChildButton
+                                            icon={
+                                                        <div className="Floating1" onClick={()=>{ScrollUp()}}>
+                                                            <div className="distance">Page Up</div>
+                                                                <ImArrowUp style={{ fontSize: 20, backgroundColor: 'white', color: 'black' }} />
+                                                        </div>
+                                                }
+                                                background={'white'}
+                                                size={40}
+                                                            
+                                    />
+                              }
                         
                         </FloatingMenu>
                     </div>
@@ -224,7 +281,7 @@ const MainPage = () => {
           <Modal isOpen={CsmAddModalISOpen} style={customStyles} onRequestClose={()=>setCsmAddModalISOpen(false)} >
                 <CsmAddModal setCsmAddModalISOpen={()=>setCsmAddModalISOpen(false)}></CsmAddModal>
             </Modal>
-         
+         <div style={{marginTop:"100px",marginBottom:"100px"}}></div>
         </MainPageMainDivBox>
     )
 }

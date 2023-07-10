@@ -125,7 +125,12 @@ const Navigation = () => {
           </MenuItem>
         <MenuItem >
           <NavLink to="/Distacne_Data" activeClassName="active">이동거리별 시간</NavLink>
-          </MenuItem></>:<></>}
+            </MenuItem>
+             <MenuItem >
+                <NavLink to="/Distacne/request" activeClassName="active">이동거리별 시간 요청 확인</NavLink>
+          </MenuItem>
+        
+          </> : <></>}
 
           <MenuItem style={{marginLeft:"100px"}}>
             <div className="Profile_Container">
