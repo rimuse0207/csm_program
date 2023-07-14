@@ -12,7 +12,7 @@ import {
   LineController,
   BarController,
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
+// import { Chart } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 import moment from 'moment';
 import { FiSettings } from "react-icons/fi";
@@ -167,15 +167,15 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
         type:'bar',
           label: 'GRINDER CSM건수',
           data: Grinder_Datas,
-          backgroundColor:'rgb(75, 192, 192,0.5)',
+          borderColor:'rgba(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235)',
        stack: 'Stack 0',
       },
     {
-       type:'line',
+       type:'bar',
           label: 'GRINDER 목표치',
       data:Grinder_Goals_Data,
-          borderColor:'rgb(75, 192, 192)',
-          backgroundColor: 'rgb(75, 192, 192)',
+          backgroundColor:'rgba(255, 99, 132, 0.5)',
     },
     
   ],
@@ -189,14 +189,14 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
       type:'bar',
       label: 'DICER CSM건수',
       data: Dicer_Datas,
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        borderColor:'rgba(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235)',
          stack: 'Stack 2',
     }, {
-      type:'line',
+      type:'bar',
       label: 'DICER 목표치',
       data:Dicer_Goals_Data,
-      borderColor:'rgba(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235)',
+      backgroundColor:'rgba(255, 99, 132, 0.5)',
     },
   ],
   };
@@ -208,16 +208,16 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
       type:'bar',
       label: 'LASER CSM건수',
       data: Laser_Datas,
-        backgroundColor:'rgba(255, 99, 132, 0.5)',
+        borderColor:'rgba(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235)',
        stack: 'Stack 1',
       },
     {
       
-         type:'line',
+         type:'bar',
       label: 'LASER 목표치',
       data: Laser_Goals_Data,
-         borderColor:'rgba(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132)',
+        backgroundColor:'rgba(255, 99, 132, 0.5)',
       },
  
   ],
@@ -227,14 +227,14 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
           <div className="chart-container">
               <div className="Chart_Sub_Container">
                 <h5>GRINDER</h5>
-                <Chart type="bar" options={Grinder_Options} data={Grinder_Data} width="30vw" />
+                <Bar type="bar" options={Grinder_Options} data={Grinder_Data} width="30vw" />
             { Login_Info.Login_Admin_Access ? <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Grinder")}>
                   <FiSettings></FiSettings>
                 </div>:<></>}
               </div>
               <div className="Chart_Sub_Container">
                 <h5>DICER</h5>
-            <Chart type="bar" options={Dicer_Options} data={Dicer_Data} width="30vw" />
+            <Bar type="bar" options={Dicer_Options} data={Dicer_Data} width="30vw" />
             { Login_Info.Login_Admin_Access ? <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Dicer")}>
                   <FiSettings></FiSettings>
                 </div>:<></>}
@@ -242,7 +242,7 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
               </div>
               <div className="Chart_Sub_Container">
                 <h5>LASER</h5>
-            <Chart type="bar" options={Laser_Options} data={Laser_Data} width="30vw" />
+            <Bar type="bar" options={Laser_Options} data={Laser_Data} width="30vw" />
               { Login_Info.Login_Admin_Access ? <div className="Setting_Icons_Container" onClick={()=>Handle_Goals_Change("Laser")}>
                   <FiSettings></FiSettings>
                 </div>:<></>}

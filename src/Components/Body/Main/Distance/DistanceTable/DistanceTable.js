@@ -81,6 +81,7 @@ const DistanceTableMainDivBox = styled.div`
 .Info_Icons{
     :hover{
         cursor: pointer;
+        
     }
 }
 `

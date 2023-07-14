@@ -62,3 +62,7 @@ li {
   z-index:1000 !important;
   background: rgba(0, 0, 0, 0.7) !important;
 }
+
+.CSM_User_Input_Alert > .react-confirm-alert{
+  width: 60%;
+}

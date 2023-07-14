@@ -20,6 +20,9 @@ const CustomModalMainDivBox = styled.div`
             cursor: pointer;
         }
     }
+    h4{
+        font-size:0.9em !important;
+    }
 `
 
 const CustomModal = ({ setNotCustomModalIsOpen }) => {
@@ -224,13 +227,16 @@ const CustomModal = ({ setNotCustomModalIsOpen }) => {
                                                         Custom_Distance:e.target.value
                                             })}></input>
                                             
-                                        </div>
+                                    </div>
+                                      <div className="InputDivBox">
+                                        <h4>KM</h4>
+                                     </div>
                                     </div>
                                 </div>
                         </div>
                         <div className="SearchInputContainer">
                                 <div className="SearchInputContainerTitle">
-                                    <h4>고객사 지역명.</h4>
+                                    <h4 style={{lineHeight:"20px"}}>고객사<br/> 지역명.</h4>
                                 </div>
                                 <div className="SearchInputContainerSubTitle">
                                     <div className="SearchInputContainerSubTitleFlexDivBox">
@@ -268,8 +274,11 @@ const CustomModal = ({ setNotCustomModalIsOpen }) => {
                                                         ...CustomSelfRegistration,
                                                         Custom_Time:e.target.value
                                             })}></input>
-                                            
-                                        </div>
+                                        
+                                    </div>
+                                    <div className="InputDivBox">
+                                        <h4>시간</h4>
+                                     </div>
                                     </div>
                                 </div>
                         </div>

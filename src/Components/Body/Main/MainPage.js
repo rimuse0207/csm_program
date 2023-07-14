@@ -17,6 +17,8 @@ import GraphMainPage from "../Graph/GraphMainPage"
 import moment from "moment";
 import { ImArrowUp } from "react-icons/im";
 import { confirmAlert } from 'react-confirm-alert'; 
+import Test from "../../Printer/Test";
+import FloatingTest from "../../Printer/FloatingTest";
 
 const customStyles = {
     content: {
@@ -109,7 +111,6 @@ const MainPage = () => {
     }   
 
     const HandleExcelDownload = async () => {
-
         confirmAlert({
             title: `CSM Excel 다운로드`,
             message: `CSM의 모든 데이터를 다운받으시겠습니까?`,
@@ -126,9 +127,6 @@ const MainPage = () => {
                 }
             ]
             });
-
-
-
     }
 
 
@@ -206,7 +204,14 @@ const MainPage = () => {
             <Navigation></Navigation>
             <GraphMainPage Grinder_Datas={Grinder_Data} Laser_Datas={Laser_Data} Dicer_Datas={Dicer_Data} Grinder_Goals_Data={Grinder_Goals_Data} Laser_Goals_Data={Laser_Goals_Data} Dicer_Goals_Data={Dicer_Goals_Data} Division_Goals_Graph_Data={()=>Division_Goals_Graph_Data()}></GraphMainPage>
             <FilterSelect></FilterSelect>
-            <CsmTable ></CsmTable>
+            {/* <CsmTable ></CsmTable> */}
+            <Test></Test>
+            
+            <div>
+                <FloatingTest></FloatingTest>
+            </div>
+
+
              <div className="FloatingMenu_Container" >
                         <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuChecking}>
                             <MainButton

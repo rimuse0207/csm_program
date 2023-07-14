@@ -121,6 +121,7 @@ export const TableData = styled.td`
 `;
 
 export const TableRow = styled.tr`
+margin-top:10px;
   .Not_Selected{
     opacity:0.5;
   }
@@ -469,7 +470,7 @@ useEffect(() => {
           </TableRow>
         </thead>
         <tbody>
-                    {Csm_Data.map((list,j) => {
+                    {Csm_Data?.map((list,j) => {
                         return <TableRow ref={Handle_scroll_Up} key={list.csm_basic_data_csm_key} onContextMenu={(e)=>handleContextMenu(e,list)} onClick={handleMenuClose} style={RightMenuClickKeys?.csm_basic_data_csm_key === list.csm_basic_data_csm_key ? {}:RightMenuIsOpen?{opacity:"0.4"}:{}} className={`${list.csm_basic_data_view_hidde_check === 1?"Hidden_Checking":""}`} >
                           <TableData >
                             <input type="checkbox" onClick={(e) => HandleCheckData(e, list)} checked={list.checked === "TRUE" || list.checked === true ? true : false}

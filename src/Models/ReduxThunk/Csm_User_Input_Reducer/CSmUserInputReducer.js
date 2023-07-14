@@ -53,9 +53,12 @@ const Csm_User_Input_Change_Bind_Data_Async = createAsyncAction(
 
 const initState = {
     Csm_User_Input_Data: {
+        start_Date: new Date(),
+        end_Date:new Date(),
         lodgment_checked: "one_day",
         lodgment_day_count:1,
         location_checked: "Pangyo",
+        Round_Trip_Count : 1,
         custom: {
          custom_options:[],
          custom_checked: {

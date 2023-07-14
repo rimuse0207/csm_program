@@ -8,6 +8,8 @@ import InputCsmNumber from './InputCsmNumber/InputCsmNumber';
 import InputModelNumber from './InputModelNumber/InputModelNumber';
 import SelectTable from './Select_Table/SelectTable';
 import InputBinds from './InputBinds/InputBinds';
+import RoundTrip from './RoundTrip/RoundTrip';
+import InputDate from './InputDate/InputDate';
 
 
 const SelectCsmTableMainDivBox = styled.div`
@@ -46,10 +48,12 @@ const SelectCsmTable = () => {
     return (
         <SelectCsmTableMainDivBox ref={ScrollUpRef}>
             <Navigation></Navigation>
-            <SelectTable></SelectTable>
             <div className="Float_Container">
                 <div className="Float_Left">
-                    <h4>CSM 조회 및 선택</h4>
+                    <h4>CSM 작업 정보</h4>
+                    <div>
+                        <InputDate></InputDate>
+                    </div>
                     <div>
                         <InputHotel></InputHotel>
                     </div>
@@ -58,6 +62,9 @@ const SelectCsmTable = () => {
                     </div>
                     <div>
                         <InputCustom></InputCustom>
+                    </div>
+                    <div>
+                        <RoundTrip></RoundTrip>
                     </div>
                     <div>
                         <InputCsmNumber></InputCsmNumber>
@@ -71,7 +78,7 @@ const SelectCsmTable = () => {
                     </div>
                 </div>
             </div>
-          
+          <SelectTable></SelectTable>
             <div style={{paddingBottom:"150px"}}></div>
 
         </SelectCsmTableMainDivBox>

@@ -13,6 +13,7 @@ import InvoiceTableMainPage from './Components/Body/Main/InvoiceTable/InvoiceTab
 import RequestDistance from './Components/Body/Main/Distance/RequestDistance/RequestDistance';
 import DistanceUpdatePage from './Components/Body/Main/Distance/DistanceTable/DistanceUpdatePage';
 import ExcelUpload from './Components/Body/Main/ExcelUpload/ExcelUpload';
+import InvoicePrinter from './Components/Printer/InvoicePrinter';
 const Routerpage = () => {
   const loading = useSelector(state => state.LoaderCheckingRedux.loading);
    const Login_Info = useSelector((state) => state.LoginInfoDataReducer.Infomation);
@@ -22,7 +23,7 @@ const Routerpage = () => {
         <Switch>
           <Route exact path="/Login" component={LoginPage} />
           <Route path="/Login/:Token_Id" component={LoginPage} />
-          
+          <Route path="/Invoice_Printer" component={InvoicePrinter}></Route>
           { Login_Info.Login_token ?<> <Route exact path="/" component={App} />
 
           <Route path="/Csm_User_Input_Data" component={SelectCsmTable}></Route>
@@ -37,6 +38,7 @@ const Routerpage = () => {
             <Route exact path="/Distacne_Data" component={DistanceMainPage}></Route>
             <Route path="/Distacne_Data/:start_location/:custommer_name/:custommer_area" component={DistanceUpdatePage}></Route>
             <Route path="/Distacne/request" component={RequestDistance}></Route>
+            <Route path="/Invoice_Printer" component={InvoicePrinter}></Route>
           <Redirect to="/" />
           </>:<><Redirect to="/Login" /></>}
          

@@ -215,7 +215,7 @@ useEffect(() => {
                             <div>( { Csm_Invoice_Select_State.length} )</div>
                         </TableHeader> : <></>}
                                     {/* <TableHeader >NO.</TableHeader> */}
-                                    <TableHeader >등록 날짜</TableHeader>
+                                    <TableHeader >작업일자</TableHeader>
                                     <TableHeader >CSM 장소</TableHeader>
                                     <TableHeader>등급</TableHeader>
                                     <TableHeader>CSM</TableHeader>
@@ -267,7 +267,7 @@ useEffect(() => {
                                     </TableData>:<></>}
                                     
                                     {/* <TableData rowSpan={list.Sub_Data.length }>{i + 1}</TableData> */}
-                                    <TableData rowSpan={Length_Checking }>{moment(list.Main_Data.csm_user_input_list_registration_date).format("YYYY-MM-DD")}</TableData>
+                                    <TableData rowSpan={Length_Checking }>{moment(list.Main_Data.csm_user_input_data_start_working_date).format("YYYY-MM-DD")} <br/>~<br/> {moment(list.Main_Data.csm_user_input_data_end_working_date).format("YYYY-MM-DD")}</TableData>
                                     <TableData rowSpan={Length_Checking}>{list.Main_Data.csm_user_input_list_custom_name}</TableData>
                                   
                                         

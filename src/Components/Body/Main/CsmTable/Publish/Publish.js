@@ -8,6 +8,7 @@ import { toast } from "../../../ToastMessage/ToastManager";
 
 export const PublishMainDivBox = styled.div`
     font-size:1em;
+    line-height: 20px;
     button{
         font-size:0.5em;
     }

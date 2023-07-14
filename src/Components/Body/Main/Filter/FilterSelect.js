@@ -63,10 +63,14 @@ export const FilterSearchMainPageDivBox = styled.div`
                 margin-right: 10px;
                 line-height: 40px;
                 width: 100px;
+                  h4{
+                    margin:0px;
+                }
             }
             .SearchInputContainerSubTitle {
                 width: 100%;
                 height: 100%;
+              
                 .SearchInputContainerSubTitleFlexDivBox {
                     display: flex;
                     width:100%;
@@ -98,7 +102,10 @@ export const FilterSearchMainPageDivBox = styled.div`
                         width: 80%;
                         height: 100%;
                        position:relative;
+                        h4{
+                            margin:10px;
 
+                        }
                         input,
                         select {
                             position:absolute;
