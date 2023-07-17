@@ -8,6 +8,7 @@ import CsmUserInputReducer from "./ReduxThunk/Csm_User_Input_Reducer/CSmUserInpu
 import CsmRegiDataReducer from './ReduxThunk/Csm_Regi_Data_Reducer/CsmRegiDataReducer'
 import CsmInvoiceSelectReducer from "./Csm_Select_Reducer/CsmInvoiceSelectReducer"
 import UserSelectReducer from "./ReduxThunk/User_Select_Reducer/UserSelectReducer"
-const rootReducer = combineReducers({  LoaderCheckingRedux,CSmFilteringReducer,CsmSelectReducer,CsmBasicDataReducer,LoginInfoDataReducer,CsmUserInputReducer,CsmRegiDataReducer,CsmInvoiceSelectReducer,UserSelectReducer });
+import Csm_PageNation_Reducer from './Csm_PageNation_Count/CsmPageNationCount';
+const rootReducer = combineReducers({  LoaderCheckingRedux,CSmFilteringReducer,CsmSelectReducer,CsmBasicDataReducer,LoginInfoDataReducer,CsmUserInputReducer,CsmRegiDataReducer,CsmInvoiceSelectReducer,UserSelectReducer,Csm_PageNation_Reducer });
 
 export default rootReducer;

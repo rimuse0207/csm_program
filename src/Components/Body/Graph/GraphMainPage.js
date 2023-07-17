@@ -38,10 +38,10 @@ Modal.setAppElement('#FilterSearchModal');
 
 const GraphMainPageMainDivBox = styled.div`
     
-    height:45vh;
+    height:30vh;
     width:100%;
     .chart-container{
-        height:45vh;
+        height:30vh;
         width:100%;
         display:flex;
         justify-content:space-around;

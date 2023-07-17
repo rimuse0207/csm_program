@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { Csm_Baisc_Data_Reduce_Thunk, Csm_Basic_Data_Change_Checked } from "../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer";
-import Publish from "../Body/Main/CsmTable/Publish/Publish";
-import Apply from "../Body/Main/CsmTable/Apply/Apply";
-import Entering from "../Body/Main/CsmTable/Entering/Entering";
-import Ce from "../Body/Main/CsmTable/CE/Ce";
-import Custom from "../Body/Main/CsmTable/Custom/Custom";
-import Pay from "../Body/Main/CsmTable/Pay/Pay";
-import { Csm_Select_Add_Data, Csm_Select_Delete_Data } from "../../Models/Csm_Select_Reducer/CsmSelectReducer";
-import { Loader_Check_For_False, Loader_Check_For_True } from "../../Models/LoaderCheckReducer/LoaderCheckReducer";
-import PageNation from "../Body/Main/PageNation/PageNation"
+import { Csm_Baisc_Data_Reduce_Thunk, Csm_Basic_Data_Change_Checked } from "../../../../../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer";
+import Publish from "../../Publish/Publish";
+import Apply from "../../Apply/Apply";
+import Entering from "../../Entering/Entering";
+import Ce from "../../CE/Ce";
+import Custom from "../../Custom/Custom";
+import Pay from "../../Pay/Pay";
+import { Csm_Select_Add_Data, Csm_Select_Delete_Data } from "../../../../../../Models/Csm_Select_Reducer/CsmSelectReducer";
+import { Loader_Check_For_False, Loader_Check_For_True } from "../../../../../../Models/LoaderCheckReducer/LoaderCheckReducer";
+import PageNation from "../../../PageNation/PageNation"
 const TestMainPage = styled.div`
     
     background-color:#efefef;
@@ -34,7 +34,7 @@ const TestMainPage = styled.div`
             align-items: center;
             box-shadow: 1px 1px 1px 1px lightgray;
             li{
-                width:8%;
+                width:10%;
                 font-weight:bolder;
                 padding:5px;
                 padding-bottom:10px;
@@ -111,7 +111,7 @@ const Test = () => {
     const CsmSelectState = useSelector(state => state.CsmSelectReducer.Csm_Select_Data);
     const Csm_Data_LoadingCheck = useSelector(state => state.CsmBasicDataReducer.Csm_Basic_Data_State.loading);
     const totalPages = useSelector(state => state.CsmBasicDataReducer.Csm_Basic_Data_State.All_Count);
-    const [PageNumbers, setPageNumbers] = useState(1);
+    const PageNumbers = useSelector((state) => state.Csm_PageNation_Reducer.PageNumbers);
   
 
 
@@ -217,7 +217,7 @@ const Test = () => {
      window.scrollTo({
                 top: 0,
                 behavior: "smooth",
-                });
+      });
   }, [PageNumbers])
   
   useEffect(() => {
@@ -229,23 +229,22 @@ const Test = () => {
         <TestMainPage>
             <div className="Table_Header_Container">
                 <ul className='Table_Header'>
-                    <li>선택</li>
-                    <li>상태</li>
-                    <li>등급</li>
+                    <li style={{width:"80px"}}>선택</li>
+                    <li style={{width:"80px"}}>상태</li>
+                    <li style={{width:"80px"}}>등급</li>
                     <li>CSM</li>
                     <li>MODEL</li>
                     <li>제번</li>
                     <li>최초 납품처</li>
-                    <li>발행</li>
-                    <li>Part <br/>발주요청</li>
-                    <li>Part <br/>입고</li>
-                    <li>Part<br/> 수령</li>
-                    <li>작업완료</li>
-                    <li>Invoice<br/> 발행</li>
-                    <li>작업시간</li>
-                    <li>작업인원</li>
+                    <li style={{width:"100px"}}>발행<br/></li>
+                    <li style={{width:"100px"}}>Part <br/>발주요청</li>
+                    <li style={{width:"100px"}}>Part <br/>입고</li>
+                    <li style={{width:"100px"}}>Part<br/> 수령</li>
+                    <li style={{width:"100px"}}>작업완료</li>
+                    <li style={{width:"100px"}}>Invoice<br/> 발행</li>
+                    <li style={{width:"100px"}}>작업시간</li>
+                    <li style={{width:"100px"}}>작업인원</li>
                     <li>비고</li>
-
                 </ul>    
             </div>
             <div>
@@ -253,14 +252,14 @@ const Test = () => {
                     {Csm_Data.map(list => {
                         return <ul className={`Table_Body ${list.checked === "false" || list.checked === false ?"":"Checking_Background"}`} key={list.csm_basic_data_csm_key} style={list.checked === "false" || list.checked === false ? {}:{border:"1px solid #368"}}  >
                             
-                            <li style={{display:"flex"}}>
+                            <li style={{display:"flex",width:"80px"}}>
                                 <div style={{ background: `${Border_Color_Checking(list)}`, width: "5px",height:"100%",marginRight:"10px",borderRadius:"10px"}}></div>
-                                <input type='checkbox' onClick={(e) => HandleCheckData(e, list)} disabled={Border_Color_Checking(list) ==="blue" ? false:true} style={Border_Color_Checking(list) ==="blue" ? {}:{opacity:0.1}}></input>
+                                <input type='checkbox' onClick={(e) => HandleCheckData(e, list)} disabled={Border_Color_Checking(list) ==="blue" ? false:true} style={Border_Color_Checking(list) ==="blue" ? {}:{opacity:0.1}} checked={list.checked === "false" || list.checked === false ? false:true}></input>
                             </li>
-                            <li>
+                            <li style={{width:"80px"}}>
                                 { list.csm_basic_data_state}
                             </li>
-                            <li>
+                            <li style={{width:"80px"}}>
                                 { list.csm_basic_data_grade}
                             </li>
                               <li>
@@ -275,43 +274,40 @@ const Test = () => {
                               <li>
                                 { list.csm_basic_data_custom}
                             </li>
-                              <li>
+                              <li style={{width:"100px"}}>
                             {/* 발행 */}
                             <Publish data={list} ></Publish>
                           </li>
-                          <li>
+                          <li style={{width:"100px"}}>
                             {/* 신청 */}
                              <Apply data={list}></Apply>
                           </li>
-                          <li>
+                          <li style={{width:"100px"}}>
                             {/* 입고 */}
                             <Entering data={list} ></Entering>
                           </li>
-                          <li>
+                          <li style={{width:"100px"}}>
                             {/* CE */}
                             <Ce data={list} ></Ce>
                             
                           </li>
-                          <li>
+                          <li style={{width:"100px"}}>
                             {/* 고객 */}
                             <Custom data={list}></Custom>
                           </li>
-                            <li >
+                            <li style={{width:"100px"}} >
                             {/* PAY */}
                             <Pay data={list}></Pay>
                           </li>
-
-                          
-                            
-                            <li>{list.csm_basic_data_working_hours} 시간</li>
-                            <li>{ list.csm_basic_data_working_count} 명</li>
+                            <li style={{width:"100px",paddingLeft:"10px"}}>{list.csm_basic_data_working_hours} 시간</li>
+                            <li style={{width:"100px"}}>{ list.csm_basic_data_working_count} 명</li>
                             <li>{ list.csm_basic_data_etc}</li>
                             </ul>
                     })}
                 
             </div>
             <div style={{marginTop:"50px"}}></div>
-        <PageNation totalPagesss={totalPages} setCurrentPage={(data) => setPageNumbers(data)} currentPage={PageNumbers}></PageNation>
+        <PageNation totalPagesss={totalPages}  currentPage={PageNumbers}></PageNation>
         </TestMainPage>
     )
     

@@ -9,6 +9,8 @@ import { AiOutlineMenu } from "react-icons/ai"
 import { FaFileInvoiceDollar } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import BasicRegisterTable from "./RegisterTable/BasicRegisterTable/BasicRegisterTable";
+import AdminRegisterTable from "./RegisterTable/AdminRegisterTable/AdminRegisterTable";
 
 
 const RegisterMainPageMainDivBox = styled.div`
@@ -71,7 +73,8 @@ const RegisterMainPage = () => {
         <RegisterMainPageMainDivBox>
             <Navigation></Navigation>
             <FilterSelect UseRegisterSearch={UseRegisterSearch}></FilterSelect>
-            <RegisterTable></RegisterTable>
+            {Login_Info.Login_Admin_Access ? <AdminRegisterTable></AdminRegisterTable>:<BasicRegisterTable></BasicRegisterTable>}
+            
         {Login_Info.Login_Admin_Access ?<div className="FloatingMenu_Container" >
                         <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuChecking}>
                             <MainButton

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Csm_Basic_Data_Change_Checked } from "../../../../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer"
 import moment from "moment";
 import { toast } from "../../../ToastMessage/ToastManager";
+import { BiMailSend } from "react-icons/bi";
 
 const Entering = ({ data }) => {
    const dispatch = useDispatch();
@@ -56,7 +57,14 @@ const Login_Info = useSelector(state => state.LoginInfoDataReducer.Infomation);
         <PublishMainDivBox>
             {data.csm_apply_id && data.csm_publish_id ? <div>{data.csm_entering_id ? <div><div>{data.csm_entering_name}</div>
                 { data.csm_entering_name ==='-'?<></>:<div>{moment(data.csm_entering_write_date).format("YY-MM-DD")}</div>}
-                </div> : <div>{ Login_Info.Login_Entering_Access?<button onClick={()=>handleClickButton()}>Part 입고</button>:<></>}</div>}</div>:<div></div>}
+            </div> : <div>
+                {Login_Info.Login_Entering_Access ?
+                        <div onClick={() => handleClickButton()} className="Button_Container">
+                            <div  style={{fontSize:'1.5em'}}>
+                                <BiMailSend></BiMailSend>
+                                </div>
+                        <div>Part 입고</div>
+                    </div> : <></>}</div>}</div> : <div></div>}
             
         </PublishMainDivBox>
     )

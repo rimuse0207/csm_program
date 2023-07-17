@@ -5,12 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { Csm_Basic_Data_Change_Checked } from "../../../../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer"
 import moment from "moment";
 import { toast } from "../../../ToastMessage/ToastManager";
+import { FaHourglassEnd } from "react-icons/fa";
 
 export const PublishMainDivBox = styled.div`
     font-size:1em;
     line-height: 20px;
     button{
         font-size:0.5em;
+    }
+    .Button_Container{
+        border:1px solid lightgray;
+        border-radius:10px;
+        font-weight:bolder;
+        box-shadow:1px 1px 1px 1px lightgray;
+        
+        :hover{
+            cursor: pointer;
+            
+        }
     }
 `
 
@@ -69,7 +81,10 @@ const Publish = ({ data }) => {
             {data.csm_publish_id ? <div>
                 <div>{data.csm_publish_name}</div>
                 <div>{ moment(data.csm_publish_write_date).format("YY-MM-DD")}</div>
-            </div>:<div><button onClick={()=>handleClickButton()}>발행</button></div>}
+            </div> : <div onClick={() => handleClickButton()} className="Button_Container">
+                    <div><FaHourglassEnd></FaHourglassEnd></div>
+                <div><div >발행</div></div>
+            </div>}
         </PublishMainDivBox>
     )
 }

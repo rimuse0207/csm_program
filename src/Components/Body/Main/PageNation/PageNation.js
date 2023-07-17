@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { CSM_PageNation_Change } from '../../../../Models/Csm_PageNation_Count/CsmPageNationCount';
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -23,6 +25,7 @@ const PageNumber = styled.li`
 
   &:hover {
     background-color: ${(props) => (props.active ? '#007bff' : '#f1f1f1')};
+    color:black;
   }
 `;
 
@@ -32,11 +35,13 @@ const Ellipsis = styled.li`
   cursor: default;
 `;
 
-const PagiNation = ({ totalPagesss, currentPage, setCurrentPage }) => {
+const PagiNation = ({ totalPagesss, currentPage }) => {
+  const dispatch = useDispatch();
   const totalPages = Math.ceil(totalPagesss / 100);
 
   const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    // setCurrentPage(pageNumber);
+    dispatch(CSM_PageNation_Change(pageNumber));
   };
 
   const renderPageNumbers = () => {

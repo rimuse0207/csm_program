@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Csm_Basic_Data_Change_Checked } from "../../../../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer"
 import moment from 'moment';
 import { toast } from "../../../ToastMessage/ToastManager";
+import { BsSend } from "react-icons/bs";
 
 const Apply = ({ data}) => {
     const dispatch = useDispatch();
@@ -62,7 +63,10 @@ const Apply = ({ data}) => {
     return (
         <PublishMainDivBox>
             { data.csm_publish_id ? <div>{data.csm_apply_id ? <div> <div>{data.csm_apply_name}</div>
-                { data.csm_apply_name === "-"?"":<div>{moment(data.csm_apply_write_date).format("YY-MM-DD")}</div>}</div> : <div><button onClick={() => handleClickButton()}>발주 요청</button></div>}</div>:<div></div>}
+                {data.csm_apply_name === "-" ? "" : <div>{moment(data.csm_apply_write_date).format("YY-MM-DD")}</div>}</div> : <div className="Button_Container" onClick={() => handleClickButton()}>
+                <div><BsSend></BsSend></div>
+                <div>발주 요청</div>
+            </div>}</div> : <div></div>}
         </PublishMainDivBox>
     )
 }

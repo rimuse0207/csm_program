@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Csm_Basic_Data_Change_Checked } from "../../../../../Models/ReduxThunk/Csm_Basic_Data_Reducer/CsmBasicDataReducer"
 import moment from 'moment';
 import { toast } from "../../../ToastMessage/ToastManager";
+import {RiUserReceivedFill} from "react-icons/ri";
 
 
 const Ce = ({ data }) => {
@@ -58,7 +59,10 @@ const Ce = ({ data }) => {
         <PublishMainDivBox>
             { data.csm_publish_id && data.csm_apply_id && data.csm_entering_id ?<div>{data.csm_ce_id ? <div><div>{data.csm_ce_name}</div>
                 { data.csm_ce_name === "-"?<div></div>:<div>{moment(data.csm_ce_write_date).format("YY-MM-DD")}</div>}
-            </div> : <div><button onClick={() => handleClickButton()}>Part 수령</button></div>}</div> : <div></div>}
+            </div> : <div onClick={() => handleClickButton()} className="Button_Container">
+                    <div style={{fontSize:"1.3em"}}><RiUserReceivedFill></RiUserReceivedFill></div>
+                <div >Part 수령</div>
+            </div>}</div> : <div></div>}
             
         </PublishMainDivBox>
     )

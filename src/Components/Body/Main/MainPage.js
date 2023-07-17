@@ -17,8 +17,12 @@ import GraphMainPage from "../Graph/GraphMainPage"
 import moment from "moment";
 import { ImArrowUp } from "react-icons/im";
 import { confirmAlert } from 'react-confirm-alert'; 
-import Test from "../../Printer/Test";
-import FloatingTest from "../../Printer/FloatingTest";
+import Test from "./CsmTable/ShowTable/BasicTable/Test";
+import FloatingTest from "./CsmTable/ShowTable/BasicTable/FloatingTest";
+import BasicTable from "./CsmTable/ShowTable/BasicTable/BaiscTable";
+import AdminTable from "./CsmTable/ShowTable/AdminTable/AdminTable";
+import AdminFloating from "./CsmTable/ShowTable/AdminTable/AdminFloating";
+import BasicFloating from "./CsmTable/ShowTable/BasicTable/BasicFloating";
 
 const customStyles = {
     content: {
@@ -91,6 +95,7 @@ const MainPage = () => {
     const HandleScrollUp = useRef(null);
     const Login_Info = useSelector((state) => state.LoginInfoDataReducer.Infomation);
     const Csm_Select_Data = useSelector((state) => state.CsmSelectReducer.Csm_Select_Data);
+    
     const [FloatingMenuChecking, setFloatingMenuChecking] = useState(true);
     const [CsmAddModalISOpen, setCsmAddModalISOpen] = useState(false);
     const [Grinder_Data, setGrinder_Data] = useState([]);
@@ -205,13 +210,13 @@ const MainPage = () => {
             <GraphMainPage Grinder_Datas={Grinder_Data} Laser_Datas={Laser_Data} Dicer_Datas={Dicer_Data} Grinder_Goals_Data={Grinder_Goals_Data} Laser_Goals_Data={Laser_Goals_Data} Dicer_Goals_Data={Dicer_Goals_Data} Division_Goals_Graph_Data={()=>Division_Goals_Graph_Data()}></GraphMainPage>
             <FilterSelect></FilterSelect>
             {/* <CsmTable ></CsmTable> */}
-            <Test></Test>
-            
-            <div>
+            {Login_Info.Login_Admin_Access ? <AdminTable></AdminTable> : <BasicTable></BasicTable>}
+            { Login_Info.Login_Admin_Access?<AdminFloating></AdminFloating>:<BasicFloating></BasicFloating>}
+            {/* <div>
                 <FloatingTest></FloatingTest>
-            </div>
+            </div> */}
 
-
+{/* 
              <div className="FloatingMenu_Container" >
                         <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuChecking}>
                             <MainButton
@@ -281,12 +286,15 @@ const MainPage = () => {
                               }
                         
                         </FloatingMenu>
-                    </div>
+                    </div> */}
 
           <Modal isOpen={CsmAddModalISOpen} style={customStyles} onRequestClose={()=>setCsmAddModalISOpen(false)} >
                 <CsmAddModal setCsmAddModalISOpen={()=>setCsmAddModalISOpen(false)}></CsmAddModal>
             </Modal>
-         <div style={{marginTop:"100px",marginBottom:"100px"}}></div>
+            {/* <div style={{marginTop:"100px",marginBottom:"100px"}}></div> */}
+            <div style={{paddingBottom:"50px",paddingTop:"50px",background:"#efefef"}}>
+
+            </div>
         </MainPageMainDivBox>
     )
 }
