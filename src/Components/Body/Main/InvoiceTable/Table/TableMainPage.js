@@ -9,11 +9,15 @@ import { toast } from "../../../ToastMessage/ToastManager";
 import { Csm_Register_Data_Change_Checked } from "../../../../../Models/ReduxThunk/Csm_Regi_Data_Reducer/CsmRegiDataReducer";
 import { Csm_Invoice_Select_Add_Data } from "../../../../../Models/Csm_Select_Reducer/CsmInvoiceSelectReducer";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { ImPrinter } from "react-icons/im";
 
 const TableMainPageMainDivBox = styled.div`
     max-width:100%;
     overflow:auto;
     font-size:0.8em;
+
+    
+
 `
 
 const TableMainPage = () => {
@@ -29,6 +33,46 @@ const TableMainPage = () => {
         y:0
     })
     const [RightMenuClickKeys, setRightMenuClickKeys] = useState(null);
+
+
+
+
+    const Handle_Invoice_Print = async () => {
+        try {
+            const Handle_Invoice_Print_Axios = await request.post(`/CE_Calendar_app_server/Handle_Invoice_Print`, {
+                RightMenuClickKeys
+            })
+            if (Handle_Invoice_Print_Axios.data.dataSuccess) {
+                  const width = 800; // 새 창의 너비
+                    const height = 600; // 새 창의 높이
+
+                    const left = (window.innerWidth - width) / 2; // 화면 중앙으로 위치 조정
+                    const top = (window.innerHeight - height) / 2; // 화면 중앙으로 위치 조정
+                 const options = `width=${width},height=${height},left=${left},top=${top}`;
+
+                const {csm_invoice_print_select_date,csm_invoice_print_key,csm_invoice_print_travel_fee_unit,csm_invoice_print_hotel_fee_unit,csm_invoice_print_hotel_fee_price,csm_invoice_print_service_fee_unit,csm_invoice_print_service_fee_sum_price}=Handle_Invoice_Print_Axios.data.Handle_Invoice_Print_Getting_Rows[0]
+                
+                window.open(`/Invoice_Printer/${moment(csm_invoice_print_select_date).format("YYYY-MM-DD")}/${csm_invoice_print_key}/${csm_invoice_print_travel_fee_unit}/${csm_invoice_print_hotel_fee_unit}/${csm_invoice_print_hotel_fee_price}/${csm_invoice_print_service_fee_unit}/${csm_invoice_print_service_fee_sum_price}`,'_blank',options);
+            } else {
+                  toast.show({
+                                title: 'Invoice 출력 ERROR',
+                                content: `다시 시도 후 IT 팀에 문의 바랍니다.`,
+                                duration: 6000,
+                                successCheck: false,
+                        });
+            }
+
+            console.log(Handle_Invoice_Print_Axios);
+
+        } catch (error) {
+            console.log(error);
+            
+
+        }
+    }
+
+
+
   const handleOutsideClick = (event) => {
   // 메뉴 영역 바깥의 클릭 이벤트를 처리하여 메뉴를 닫습니다.
   const isOutsideMenu = event.target.closest('.Right_Menu_Container') === null;
@@ -260,7 +304,10 @@ useEffect(() => {
                                     {} :{opacity:"0.5"}:{}
                                     } >
                             <TableData  rowSpan={Sum_Lenght }>{j + 1}</TableData>
-                                <TableData  rowSpan={Sum_Lenght}>{list?.Invoice_Sum_List_Rows?.csm_invoice_list_registration_key}</TableData>
+                                <TableData rowSpan={Sum_Lenght}>
+                                    <div>{list?.Invoice_Sum_List_Rows?.csm_invoice_list_registration_key}</div>
+                                   
+                                </TableData>
                                 <TableData rowSpan={Sum_Lenght}>{ list?.Invoice_Sum_List_Rows?.csm_invoice_list_erp_document_number}</TableData>
                             <TableData  rowSpan={Sum_Lenght}>￥{  list.Inovoice_basic_csm_Data.reduce((acc, innerArray) => {
                                                     return acc + innerArray.reduce((innerAcc, obj) => innerAcc + obj.csm_user_input_data_total_cost, 0);
@@ -293,6 +340,7 @@ useEffect(() => {
                                     <>
                                         <li onClick={()=>Handle_Delete_Invoice_Number()}>인보이스 발행 취소</li>
                                         <li onClick={() => Handle_Input_Document_Number()}>전표번호 작성</li>
+                                        <li onClick={() => Handle_Invoice_Print()}>Invoice 출력</li>
                                     </> : <></>
                             } 
                              

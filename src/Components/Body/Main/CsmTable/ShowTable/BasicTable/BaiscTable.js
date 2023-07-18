@@ -237,11 +237,11 @@ const BasicTable = () => {
                     <li>제번</li>
                     <li>최초 납품처</li>
                     <li style={{width:"100px"}}>발행<br/></li>
-                    <li style={{width:"100px"}}>Part <br/>발주요청</li>
-                    <li style={{width:"100px"}}>Part <br/>입고</li>
-                    <li style={{width:"100px"}}>Part<br/> 수령</li>
+                    <li style={{width:"100px",lineHeight:"25px"}}>Part <br/>발주요청</li>
+                    <li style={{width:"100px",lineHeight:"25px"}}>Part <br/>입고</li>
+                    <li style={{width:"100px",lineHeight:"25px"}}>Part<br/> 수령</li>
                     <li style={{width:"100px"}}>작업완료</li>
-                    <li style={{width:"100px"}}>Invoice<br/> 발행</li>
+                    <li style={{width:"100px",lineHeight:"25px"}}>Invoice<br/> 발행</li>
                     <li style={{width:"100px"}}>작업시간</li>
                     <li style={{width:"100px"}}>작업인원</li>
                     <li>비고</li>

@@ -23,7 +23,7 @@ const Routerpage = () => {
         <Switch>
           <Route exact path="/Login" component={LoginPage} />
           <Route path="/Login/:Token_Id" component={LoginPage} />
-          <Route path="/Invoice_Printer" component={InvoicePrinter}></Route>
+          <Route path="/Invoice_Printer/:Select_Date/:Invoice_Number/:Travel_Fee_Unit/:Hotel_Count/:Hotel_Cost/:service_time/:Total_Cost" component={InvoicePrinter}></Route>
           { Login_Info.Login_token ?<> <Route exact path="/" component={App} />
 
           <Route path="/Csm_User_Input_Data" component={SelectCsmTable}></Route>
@@ -38,7 +38,7 @@ const Routerpage = () => {
             <Route exact path="/Distacne_Data" component={DistanceMainPage}></Route>
             <Route path="/Distacne_Data/:start_location/:custommer_name/:custommer_area" component={DistanceUpdatePage}></Route>
             <Route path="/Distacne/request" component={RequestDistance}></Route>
-            <Route path="/Invoice_Printer" component={InvoicePrinter}></Route>
+            <Route path="/Invoice_Printer/:Select_Date/:Invoice_Number/:Travel_Fee_Unit/:Hotel_Count/:Hotel_Cost/:service_time/:Total_Cost" component={InvoicePrinter}></Route>
           <Redirect to="/" />
           </>:<><Redirect to="/Login" /></>}
          

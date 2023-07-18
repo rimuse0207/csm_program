@@ -532,16 +532,16 @@ useEffect(() => {
                         <li style={{borderLeft: "1px solid gray"}}>이동거리</li>
                         <li>이동시간</li>
                         <li>숙박일수</li>
-                        <li>이동거리 <br/>비용</li>
+                        <li style={{lineHeight:"25px"}}>이동거리 <br/>비용</li>
                         <li>이동시간 <br />비용</li>
                         <li>숙박비용</li>
                         <li>작업비용</li>
                         <li>총비용</li>
                         
                         <li style={{borderLeft: "1px solid gray"}}>발행<br/></li>
-                        <li >Part <br/>발주요청</li>
-                        <li >Part <br/>입고</li>
-                        <li >Part<br/> 수령</li>
+                        <li style={{lineHeight:"25px"}}>Part <br/>발주요청</li>
+                        <li style={{lineHeight:"25px"}}>Part <br/>입고</li>
+                        <li style={{lineHeight:"25px"}}>Part<br/> 수령</li>
                         <li >작업완료</li>
                         <li >Invoice<br /> 발행</li>
                         <li style={{borderRight: "1px solid gray"}}>완료</li>

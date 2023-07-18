@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import moment from "moment";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const InvoicePrinterMainDivBox = styled.div`
     line-height:0px !important;
  @page {
   size: A3; // 프린트 사이즈
-  margin: 10mm; // 프린트 여백
+  margin: 30mm; // 프린트 여백
 }
 
 
@@ -30,51 +31,54 @@ page-break-inside: avoid; // 해당 엘리먼트의 내부에서 페이지 넘�
 
 
 const InvoicePrinter = () => {
+    const { Select_Date,Invoice_Number, Travel_Fee_Unit , Hotel_Count , Hotel_Cost , service_time , Total_Cost } = useParams();
     const [PrinterData, setPrinterData] = useState(`
       <html>
       <thead>
       <style>
         *{
             line-height:0px;
-            font-size:1.2em;
             
         }
         td> p{
             
              margin-bottom:10px;   
             }
+        tr>td> p> span{
+            font-size:1.5em !important;
+        }
           
       </style>
       </thead>
       <tbody>
         <div>
             <p style="margin-left:0px;margin-bottom:0px;margin-right:0px;margin-top:0px;"><br/></p>
-<table class="cui-pasted-table" style="border-collapse:collapse;width:597.33px;word-break:break-all;">
+<table class="cui-pasted-table" style="border-collapse:collapse;width:100%;word-break:break-all;">
     <colgroup><col style="width:74.6663px;"/><col style="width:74.6663px;"/><col style="width:74.6663px;"/><col style="width:74.6663px;"/><col style="width:74.6663px;"/><col style="width:74.6663px;"/><col style="width:74.6663px;"/><col style="width:74.6663px;"/></colgroup>
     <tbody>
         <tr style>
             <td style="height:34.5px;width:597.33px;font-size:20pt;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-bottom:1.33px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" width="597" height="35" colspan="8">
-                <p style="margin-bottom:30px;"><span style="font-size:30pt;font-family:바탕체, serif;"><b style="">COMMERCIAL INVOICE</b></span></p>
+                <p style="margin-bottom:30px;"><span style="font-size:30pt;font-family:inherit;"><b style="">COMMERCIAL INVOICE</b></span></p>
             </td>
         </tr>
         <tr style>
-            <td style="height:20px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" colspan="2" height="21">
+            <td style="height:20px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:3px solid rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" colspan="2" height="21">
                 <p><span style="font-size:12pt;font-family:바탕체, serif;">①Shipper/Exporter</span></p>
             </td>
-            <td style="font-size:12pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+            <td style="font-size:12pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;border-top:3px solid rgb(0, 0, 0);">
                 <p><span style="font-size:12pt;font-family:바탕체, serif;"></span><br/></p>
             </td>
-            <td style="font-size:12pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1.33px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+            <td style="font-size:12pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1.33px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;border-top:3px solid rgb(0, 0, 0);">
                 <p><span style="font-size:12pt;font-family:바탕체, serif;">　</span></p>
             </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" colspan="2">
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;border-top:3px solid rgb(0, 0, 0);" colspan="2">
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">⑧No.&amp; Date of
   Invoice&nbsp;</span></p>
             </td>
-            <td style="color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;border:0px none rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+            <td style="color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;border:0px none rgb(0, 0, 0);white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;border-top:3px solid rgb(0, 0, 0);">
                 <p><span style="font-size:11pt;font-family:돋움, monospace;"></span><br/></p>
             </td>
-            <td style="font-size:12pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+            <td style="font-size:12pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;border-top:3px solid rgb(0, 0, 0);">
                 <p><span style="font-size:12pt;font-family:바탕체, serif;"></span><br/></p>
             </td>
         </tr>
@@ -92,15 +96,15 @@ const InvoicePrinter = () => {
                 <p><span style="font-size:12pt;font-family:바탕체, serif;">　</span></p>
             </td>
             <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:none;border-bottom:1px solid rgb(0, 0, 0);background:yellow;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" colspan="2">
-                <p><span style="font-size:11pt;font-family:바탕체, serif;">${moment().format("YYYYMMDDHH")}</span></p>
+                <p><span style="font-size:11pt;font-family:바탕체, serif;">${Invoice_Number}</span></p>
             </td>
             <td style="text-align:center;border-top:none;border-bottom:1px solid rgb(0, 0, 0);border-left:none;background:yellow;color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;white-space:nowrap;height:20.79px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" colspan="2">
-                <p><span style="font-size:11pt;font-family:돋움, monospace;">${moment().format("YYYY-MM-DD")}</span></p>
+                <p><span style="font-size:11pt;font-family:돋움, monospace;">${moment(Select_Date).format("DD")}-${moment(Select_Date).format("MMM")}-${moment(Select_Date).format("YY")}</span></p>
             </td>
         </tr>
         <tr style>
             <td style="height:34px;color:navy;font-size:20pt;font-family:바탕, serif;vertical-align:top;border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 128);border-right:0px none rgb(0, 0, 128);border-bottom:0px none rgb(0, 0, 128);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" colspan="3" height="34">
-                <p><span style="font-size:20pt;font-family:바탕, serif;"><b>DHK</b><b><span style="color:navy;font-size:20.0pt;font-family:바탕체, serif;"><b> SOLUTION</b></span></b></span></p>
+                <p><span style="font-size:20pt;font-family:바탕, serif;"><b>DHK</b><b><span style="color:navy;font-family:바탕체, serif;"><b> SOLUTION</b></span></b></span></p>
             </td>
             <td style="font-size:12pt;font-family:바탕체, serif;vertical-align:top;border-top:none;border-right:1.33px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:34.4px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
                 <p><span style="font-size:12pt;font-family:바탕체, serif;">　</span></p>
@@ -489,11 +493,11 @@ const InvoicePrinter = () => {
             <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;background:yellow;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
                 <p><span style="font-size:11pt;font-family:바탕체, serif;">1</span></p>
             </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${"이동거리 시간 + 이동 거리비용"}</span></p>
+            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:10px;padding-top:0px;  text-align:end;">
+                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${Travel_Fee_Unit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></p>
             </td>
             <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:none;border-bottom:none;border-left:1px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥${"이동거리 시간 + 이동 거리비용"} </span></p>
+                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥${Travel_Fee_Unit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </span></p>
             </td>
         </tr>
         <tr style>
@@ -507,13 +511,13 @@ const InvoicePrinter = () => {
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">HOTEL FEE</span></p>
             </td>
             <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;background:yellow;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:21px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:바탕체, serif;">0</span></p>
+                <p><span style="font-size:11pt;font-family:바탕체, serif;">${Hotel_Count}</span></p>
             </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:21px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5,000 </span></p>
+            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:21px;padding-left:0px;padding-bottom:0px;padding-right:10px;padding-top:0px;  text-align:end;">
+                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5,000 </span></p>
             </td>
             <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:none;border-bottom:none;border-left:1px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;height:21px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥0 </span></p>
+                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥${(Hotel_Count*5000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </span></p>
             </td>
         </tr>
         <tr style>
@@ -527,13 +531,13 @@ const InvoicePrinter = () => {
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">SERVICE FEE( 1 Hour)</span></p>
             </td>
             <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;background:yellow;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:바탕체, serif;">93</span></p>
+                <p><span style="font-size:11pt;font-family:바탕체, serif;">${service_time}</span></p>
             </td>
-            <td style="border:0px none rgb(0, 0, 0);font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+            <td style="border:0px none rgb(0, 0, 0);font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:10px;padding-top:0px; text-align:end;">
                 <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11,000 </span></p>
             </td>
             <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:none;border-bottom:none;border-left:1px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥1,023,000 </span></p>
+                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥${(service_time*11000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </span></p>
             </td>
         </tr>
         <tr style>
@@ -562,6 +566,7 @@ const InvoicePrinter = () => {
                 <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">　</span></p>
             </td>
         </tr>
+       
         <tr style>
             <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
                 <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
@@ -577,84 +582,6 @@ const InvoicePrinter = () => {
             </td>
             <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
-            </td>
-            <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:바탕체, serif;">　</span></p>
-            </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:none;border-bottom:none;border-left:1px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">　</span></p>
-            </td>
-        </tr>
-        <tr style>
-            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
-            </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
-            </td>
-            <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:바탕체, serif;">　</span></p>
-            </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:none;border-bottom:none;border-left:1px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">　</span></p>
-            </td>
-        </tr>
-        <tr style>
-            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
-            </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
-            </td>
-            <td style="border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:돋움, monospace;">　</span></p>
-            </td>
-            <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:바탕체, serif;">　</span></p>
-            </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;"></span><br/></p>
-            </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:none;border-bottom:none;border-left:1px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">　</span></p>
-            </td>
-        </tr>
-        <tr style>
-            <td style="height:19px;color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
-                <p><span style="font-size:11pt;font-family:돋움, monospace;"></span><br/></p>
-            </td>
-            <td style="border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:돋움, monospace;">　</span></p>
-            </td>
-            <td style="color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:돋움, monospace;"></span><br/></p>
-            </td>
-            <td style="color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:돋움, monospace;"></span><br/></p>
-            </td>
-            <td style="border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:돋움, monospace;">　</span></p>
             </td>
             <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
                 <p><span style="font-size:11pt;font-family:바탕체, serif;">　</span></p>
@@ -734,14 +661,92 @@ const InvoicePrinter = () => {
             <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
             </td>
-            <td style="border-left:none;font-family:바탕체, serif;text-align:center;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;color:rgb(0, 0, 0);font-size:11pt;white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:11pt;font-family:바탕체, serif;">　</span></p>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
             </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;"></span><br/></p>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
             </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:none;border-bottom:none;border-left:1px solid rgb(0, 0, 0);color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">　</span></p>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+        </tr>
+         <tr style>
+            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+        </tr>
+        <tr style>
+            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+        </tr>
+        <tr style>
+            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
             </td>
         </tr>
         <tr style>
@@ -786,8 +791,112 @@ const InvoicePrinter = () => {
             <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:1px solid rgb(0, 0, 0);border-right:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
             </td>
-            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
-                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥1,680,000.00</span></p>
+            <td style="font-size:9pt;font-family:&quot;맑은 고딕&quot;, monospace;text-align:right;vertical-align:middle;border-top:1px solid rgb(0, 0, 0);border-bottom:1px solid rgb(0, 0, 0);border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:30px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:'맑은 고딕', monospace;">¥${Total_Cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}.00</span></p>
+            </td>
+        </tr>
+        <tr style>
+            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+        </tr>
+         <tr style>
+            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+        </tr>
+         <tr style>
+            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+        </tr>
+        <tr style>
+            <td style="height:19px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" height="19">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
+            </td>
+            <td style="font-size:9pt;font-family:바탕체, serif;text-align:right;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);border-left:0px none rgb(0, 0, 0);height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
+                <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
             </td>
         </tr>
         <tr style>
@@ -858,7 +967,8 @@ const InvoicePrinter = () => {
             <td style="font-size:9pt;font-family:바탕체, serif;vertical-align:middle;border-top:none;border-right:1px solid rgb(0, 0, 0);border-bottom:none;border-left:none;color:rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;">
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">　</span></p>
             </td>
-            <td style="color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" valign="top" align="left">
+            
+            <td style="color:rgb(0, 0, 0);font-size:11pt;font-family:돋움, monospace;vertical-align:bottom;border:0px none rgb(0, 0, 0);white-space:nowrap;height:19.2px;padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px; border-right: 1px solid black;" valign="top" align="left">
                 <p><span style="font-size:11pt;font-family:돋움, monospace;"><IMG src="${process.env.REACT_APP_DB_HOST}/mbchoi.png" embedded-id="0" style="position:absolute;margin-top:23px;margin-left:51px;z-index:1;" data-cui-alt-image="true" data-cui-image="true" unselectable="on" title="No Image" height="53" width="176"/>
   </span></p>
                
@@ -872,6 +982,7 @@ const InvoicePrinter = () => {
                 <p><span style="font-size:9pt;font-family:바탕체, serif;"></span><br/></p>
             </td>
         </tr>
+        
         <tr style>
             <td style="height:20px;font-size:9pt;font-family:바탕체, serif;vertical-align:middle;color:rgb(0, 0, 0);border-image:initial;white-space:nowrap;border-top:0px none rgb(0, 0, 0);border-right:0px none rgb(0, 0, 0);border-bottom:0px none rgb(0, 0, 0);padding-left:0px;padding-bottom:0px;padding-right:0px;padding-top:0px;" colspan="3" height="21">
                 <p><span style="font-size:9pt;font-family:바탕체, serif;">*
@@ -983,6 +1094,18 @@ const InvoicePrinter = () => {
         </div>
       </tbody>
         </html>`)
+    
+     useEffect(() => {
+        
+            setTimeout(() => {
+                window.print();
+            }, 1000);
+            window.onafterprint = function () {
+                window.close();
+            };
+        
+    }, []);
+    
     return (
         <InvoicePrinterMainDivBox dangerouslySetInnerHTML={ {__html: PrinterData} }>
             

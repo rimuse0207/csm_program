@@ -7,6 +7,10 @@ import { useHistory } from 'react-router-dom';
 import { request } from "../../../../../APIs/index";
 import { Csm_Invoice_Select_Reset_Data } from '../../../../../Models/Csm_Select_Reducer/CsmInvoiceSelectReducer';
 import { toast } from '../../../ToastMessage/ToastManager';
+import DatePicker from 'react-datepicker';
+import { ko } from 'date-fns/esm/locale';
+import moment from "moment";
+
 
 const InvoiceTextInputMainDivBox = styled.div`
  padding:10px;
@@ -54,7 +58,7 @@ const InvoiceTextInput = () => {
     const dispatch = useDispatch();
     const Csm_Invoice_Select_State = useSelector((state) => state.CsmInvoiceSelectReducer.Csm_Invoice_Select_Data);
     const Login_Info = useSelector(state => state.LoginInfoDataReducer.Infomation);
-    const [InvoiceNumber, setInvoiceNumber] = useState("");
+    const [InvoiceNumber, setInvoiceNumber] = useState(new Date());
     const HandleSubmitInvoiceApply = async () => {
         try {
             
@@ -73,6 +77,14 @@ const InvoiceTextInput = () => {
                 return;
             }
             else if (Handle_Submit_Invoice_Apply_Axios.data.dataSuccess) {
+                  const width = 800; // 새 창의 너비
+                    const height = 600; // 새 창의 높이
+
+                    const left = (window.innerWidth - width) / 2; // 화면 중앙으로 위치 조정
+                    const top = (window.innerHeight - height) / 2; // 화면 중앙으로 위치 조정
+                 const options = `width=${width},height=${height},left=${left},top=${top}`;
+
+                window.open(`/Invoice_Printer/${moment(InvoiceNumber).format("YYYY-MM-DD")}/${Handle_Submit_Invoice_Apply_Axios.data.InvoiceNumber_keys}/${Handle_Submit_Invoice_Apply_Axios.data.Travel_Fee_Unit}/${Handle_Submit_Invoice_Apply_Axios.data.Hotel_Count}/${Handle_Submit_Invoice_Apply_Axios.data.Hotel_Cost}/${Handle_Submit_Invoice_Apply_Axios.data.service_time}/${Handle_Submit_Invoice_Apply_Axios.data.Total_Cost}`,'_blank',options);
                 toast.show({
                 title: `Invoice 등록 성공`,
                 content: `${Csm_Invoice_Select_State.length}건에 대해 Invoice등록 처리 하였습니다.`,
@@ -80,7 +92,10 @@ const InvoiceTextInput = () => {
                 successCheck: true,
                 });
                 dispatch(Csm_Invoice_Select_Reset_Data());
+                
                 history.push('/Csm_Invoice_Pay_Finished')
+            } else {
+                console.log(Handle_Submit_Invoice_Apply_Axios);
             }
 
         } catch (error) {
@@ -105,23 +120,31 @@ const InvoiceTextInput = () => {
                     return acc + subTotal;                    
                     },0).toLocaleString()
                     } </span>입니다.</div>
-            <div style={{marginBottom:"30px"}}>등록 하실 Inovice를 입력 해 주세요.</div>
-            <input placeholder="Invoice를 입력 해 주세요." value={InvoiceNumber} onChange={(e)=>setInvoiceNumber(e.target.value)}></input>
-             <div className="btns">
-                    <button className="btn btn-cancel" onClick={()=>HandleInvoiceDataReset()} >
-                        <span style={{ marginRight: '10px' }}>
-                            <GrPowerReset></GrPowerReset>
-                        </span>
+            <div style={{ marginBottom: "30px" }}>등록 하실 Inovice를 입력 해 주세요.</div>
+            
+           <h3>Invoice 발행날짜를 선택 해 주세요.</h3>
+             <DatePicker
+                                                    locale={ko}
+                                                    dateFormat={"yyyy-MM-dd"}
+                                                    selected={InvoiceNumber}
+                                                    maxDate={new Date()}
+                                                    onChange={(e)=>setInvoiceNumber(e)}
+                                                ></DatePicker>
+                    <div className="btns">
+                            <button className="btn btn-cancel" onClick={()=>HandleInvoiceDataReset()} >
+                                <span style={{ marginRight: '10px' }}>
+                                    <GrPowerReset></GrPowerReset>
+                                </span>
 
-                        <span>취소</span>
-                    </button>
-                    <button className="btn btn-confirm" onClick={()=>HandleSubmitInvoiceApply()} >
-                        <span style={{ marginRight: '10px' }}>
-                            <FaCashRegister></FaCashRegister>
-                        </span>
-                        <span>등록</span>
-                    </button>
-                </div>
+                                <span>취소</span>
+                            </button>
+                            <button className="btn btn-confirm" onClick={()=>HandleSubmitInvoiceApply()} >
+                                <span style={{ marginRight: '10px' }}>
+                                    <FaCashRegister></FaCashRegister>
+                                </span>
+                                <span>등록</span>
+                            </button>
+                        </div>
         </InvoiceTextInputMainDivBox>
     )
 }

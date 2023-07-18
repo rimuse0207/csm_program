@@ -374,14 +374,14 @@ useEffect(() => {
                         <li>이동거리</li>
                         <li>이동시간</li>
                         <li>숙박일수</li>
-                        <li>이동거리 <br />비용</li>
-                        <li>이동시간 <br />비용</li>
+                        <li style={{lineHeight:"20px"}}>이동거리 <br />비용</li>
+                        <li style={{lineHeight:"20px"}}>이동시간 <br />비용</li>
                         <li>숙박 비용</li>
                         <li>작업 비용</li>
                         <li>발행</li>
-                        <li >Part <br/>발주요청</li>
-                        <li >Part <br/>입고</li>
-                        <li >Part<br/> 수령</li>
+                        <li style={{lineHeight:"20px"}}>Part <br/>발주요청</li>
+                        <li style={{lineHeight:"20px"}}>Part <br/>입고</li>
+                        <li style={{lineHeight:"20px"}}>Part<br/> 수령</li>
                         <li >작업완료</li>
                         <li >Invoice<br /> 발행</li>
                         <li style={{borderRight:"1px solid gray"}}>완료</li>
@@ -439,14 +439,14 @@ useEffect(() => {
                                         <li>{item.csm_user_input_data_travel_range} KM</li>
                                         <li>{item.csm_user_input_data_travel_time} 시간</li>
                                         <li>{item.csm_user_input_data_stay_days ===0?"":item.csm_user_input_data_stay_days+"일"} </li>
-                                        <li>￥{item.csm_user_input_data_travel_range_cost.toString()
-                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</li>
-                                        <li>￥{item.csm_user_input_data_travel_time_cost.toString()
-                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</li>
-                                        <li>￥{item.csm_user_input_data_stay_days_cost.toString()
-                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</li>
-                                        <li>￥{item.csm_user_input_data_operation_cost.toString()
-                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</li>
+                                        <li>{item.csm_user_input_data_travel_range_cost !==0 ?'￥'+item.csm_user_input_data_travel_range_cost.toString()
+                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ','):""}</li>
+                                        <li>{item.csm_user_input_data_travel_time_cost !==0? "￥"+item.csm_user_input_data_travel_time_cost.toString()
+                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ','):""}</li>
+                                        <li>{item.csm_user_input_data_stay_days_cost !==0 ? "￥"+item.csm_user_input_data_stay_days_cost.toString()
+                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ','):""}</li>
+                                        <li>{item.csm_user_input_data_operation_cost !==0 ?"￥"+item.csm_user_input_data_operation_cost.toString()
+                                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ','):""}</li>
                                         
                                         <li><Publish data={item}></Publish></li>
                                         <li><Apply data={item}></Apply></li>
