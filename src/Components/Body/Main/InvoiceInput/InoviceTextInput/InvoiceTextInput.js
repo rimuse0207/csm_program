@@ -10,6 +10,7 @@ import { toast } from '../../../ToastMessage/ToastManager';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import moment from "moment";
+import { Csm_Grade_Data_Reduce_Thunk } from '../../../../../Models/ReduxThunk/Csm_Grade_Data_Reducer/Csn_Grade_Data_Reducer';
 
 
 const InvoiceTextInputMainDivBox = styled.div`
@@ -91,6 +92,7 @@ const InvoiceTextInput = () => {
                 duration: 6000,
                 successCheck: true,
                 });
+                dispatch(Csm_Grade_Data_Reduce_Thunk());
                 dispatch(Csm_Invoice_Select_Reset_Data());
                 
                 history.push('/Csm_Invoice_Pay_Finished')

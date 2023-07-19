@@ -37,6 +37,23 @@ const FilterSelectMainDivBox = styled.div`
     margin-top:30px;
 `
 
+const Input_Color_Check_Container = styled.div`
+      input[type="checkbox"] {
+        background-color:  ${props => props.color};
+         accent-color:${props => props.color};
+  }
+  input{
+    &:checked{
+        background-color:  ${props => props.color};
+        accent-color:${props => props.color};
+    }
+  }
+    .checked_lable{
+    color:${props => props.color ==="white"?"black":props.color};
+    font-weight:bolder;
+  }
+`
+
 export const FilterSearchMainPageDivBox = styled.div`
     padding: 10px;
     margin-right: 30px;
@@ -199,6 +216,59 @@ const FilterSelect = ({UseRegisterSearch}) => {
     const User_Select_Options_State = useSelector(state => state.UserSelectReducer.User_Data.User_Select_Options);
     const [FilterSearchModalIsOpen, setFilterSearchModalIsOpen] = useState(false);
     const [SelectMenuTitle, setSelectMenuTitle] = useState(null);
+
+
+
+
+    const HandleColorCheck = (data) => {
+         if (data.csm_calendar_publish) {
+            if (data.csm_calendar_apply) {
+                if (data.csm_calendar_entering) {
+                    if (data.csm_calendar_ce) {
+                        if (data.csm_calendar_custom) {
+                            if (data.csm_calendar_pay) {
+                                
+                                if (data.csm_calendar_finall) {
+                                    //완료
+                                    return "white"
+
+                                } else {
+                                    //미완료
+                                    return "purple"
+                                }
+
+                            } else {
+                                //Invoice발행
+                                return "indigo"
+                            }
+
+
+                        } else {
+                            //작업완료
+                            return "blue";
+                        }
+
+
+                    } else {
+                        //Part 수령
+                        return "green";        
+                    }
+
+                } else {
+                    //Part 입고
+                    return "gold";    
+                }
+
+            } else {
+                //Part 발주요청
+                return "orange";
+            }
+        } else {
+            // 발행 없음
+            return "red";
+        }
+    }
+
 
     const HandleFilterDataReset = () => {
         dispatch(Csm_Baisc_Data_Reduce_Thunk(1, initState.Csm_Filter_State, CsmSelectState));
@@ -421,7 +491,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     id="state_Open"
                                                     checked={Csm_Filter_States.csm_basic_data_state === "Open"}
                                                     onChange={(e) => handleChange(e, "csm_basic_data_state")}></input>
-                                                    <label  htmlFor="state_Open">
+                                                    <label  htmlFor="state_Open" >
                                                         Open
                                                     </label>
                                             </div>
@@ -746,7 +816,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                             </label>
                                         </div>
                                         <div className="InputRadioDivBox">
-                                            <div>
+                                            <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.cms_calendar_all}
@@ -755,8 +825,8 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                 readOnly
                                                 ></input>
                                                 <label htmlFor="cms_calendar_all">전체</label>
-                                             </div>
-                                            <div>
+                                             </Input_Color_Check_Container>
+                                            <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.csm_calendar_publish}
@@ -765,9 +835,9 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     readOnly
                                                     disabled={UseRegisterSearch?true:false}
                                                 ></input>
-                                                <label htmlFor="csm_calendar_publish">발행</label>
-                                            </div>
-                                            <div>
+                                                <label className={`${Csm_Filter_States.csm_calendar_publish ? "checked_lable":""}`} htmlFor="csm_calendar_publish" >발행</label>
+                                            </Input_Color_Check_Container>
+                                            <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.csm_calendar_apply}
@@ -776,9 +846,9 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     disabled={UseRegisterSearch?true:false}
                                                 readOnly
                                                 ></input>
-                                                <label htmlFor="csm_calendar_apply">Part 발주 요청</label>
-                                             </div>
-                                             <div>
+                                                <label className={`${Csm_Filter_States.csm_calendar_apply ? "checked_lable":""}`} htmlFor="csm_calendar_apply" >Part 발주 요청</label>
+                                             </Input_Color_Check_Container>
+                                             <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.csm_calendar_entering}
@@ -787,9 +857,9 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     disabled={UseRegisterSearch?true:false}
                                                 readOnly
                                                 ></input>
-                                                <label htmlFor="csm_calendar_entering">Part 입고</label>
-                                             </div>
-                                             <div>
+                                                <label className={`${Csm_Filter_States.csm_calendar_entering ? "checked_lable":""}`} htmlFor="csm_calendar_entering" >Part 입고</label>
+                                             </Input_Color_Check_Container>
+                                             <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.csm_calendar_ce}
@@ -798,10 +868,10 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     disabled={UseRegisterSearch?true:false}
                                                 readOnly
                                                 ></input>
-                                                <label htmlFor="csm_calendar_ce">Part 수령</label>
-                                            </div>
+                                                <label className={`${Csm_Filter_States.csm_calendar_ce ? "checked_lable":""}`} htmlFor="csm_calendar_ce" >Part 수령</label>
+                                            </Input_Color_Check_Container>
                                             
-                                              <div>
+                                              <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.csm_calendar_custom}
@@ -810,9 +880,9 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     disabled={UseRegisterSearch?true:false}
                                                 readOnly
                                                 ></input>
-                                                <label htmlFor="csm_calendar_custom">작업완료</label>
-                                             </div>
-                                               <div>
+                                                <label className={`${Csm_Filter_States.csm_calendar_custom ? "checked_lable":""}`} htmlFor="csm_calendar_custom" >작업완료</label>
+                                             </Input_Color_Check_Container>
+                                               <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.csm_calendar_pay}
@@ -820,9 +890,9 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     onChange={e=>handleChange(e,"csm_calendar_pay")}
                                                 readOnly
                                                 ></input>
-                                                <label htmlFor="csm_calendar_pay">인보이스 발행</label>
-                                            </div>
-                                              <div>
+                                                <label className={`${Csm_Filter_States.csm_calendar_pay ? "checked_lable":""}`} htmlFor="csm_calendar_pay" >인보이스 발행</label>
+                                            </Input_Color_Check_Container>
+                                              <Input_Color_Check_Container color={`${HandleColorCheck(Csm_Filter_States)}`}>
                                                    <input
                                                 type="checkbox"
                                                 checked={Csm_Filter_States.csm_calendar_finall}
@@ -830,8 +900,8 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                     onChange={e=>handleChange(e,"csm_calendar_finall")}
                                                 readOnly
                                                 ></input>
-                                                <label htmlFor="csm_calendar_finall">완료</label>
-                                            </div>
+                                                <label className={`${Csm_Filter_States.csm_calendar_finall ? "checked_lable":""}`} htmlFor="csm_calendar_finall">완료</label>
+                                            </Input_Color_Check_Container>
                                               
                                         </div>
                                         

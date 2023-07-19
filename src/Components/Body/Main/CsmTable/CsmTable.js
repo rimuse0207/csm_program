@@ -121,7 +121,7 @@ export const TableData = styled.td`
 `;
 
 export const TableRow = styled.tr`
-margin-top:10px;
+
   .Not_Selected{
     opacity:0.5;
   }

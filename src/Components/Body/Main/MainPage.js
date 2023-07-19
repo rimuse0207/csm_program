@@ -7,7 +7,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { AiOutlineMenu,AiFillDatabase } from "react-icons/ai";
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlinePlaylistAdd } from "react-icons/md";
 import CsmAddModal from "./MainModal/CsmAddModal";
 import Modal from "react-modal";
@@ -23,6 +23,7 @@ import BasicTable from "./CsmTable/ShowTable/BasicTable/BaiscTable";
 import AdminTable from "./CsmTable/ShowTable/AdminTable/AdminTable";
 import AdminFloating from "./CsmTable/ShowTable/AdminTable/AdminFloating";
 import BasicFloating from "./CsmTable/ShowTable/BasicTable/BasicFloating";
+import { Csm_Grade_Data_Reduce_Thunk } from "../../../Models/ReduxThunk/Csm_Grade_Data_Reducer/Csn_Grade_Data_Reducer";
 
 const customStyles = {
     content: {
@@ -92,6 +93,7 @@ const MainPageMainDivBox = styled.div`
 `
 
 const MainPage = () => {
+    const dispatch = useDispatch();
     const HandleScrollUp = useRef(null);
     const Login_Info = useSelector((state) => state.LoginInfoDataReducer.Infomation);
     const Csm_Select_Data = useSelector((state) => state.CsmSelectReducer.Csm_Select_Data);
@@ -201,6 +203,7 @@ const MainPage = () => {
 
     useEffect(() => {
         Division_Goals_Graph_Data(); 
+        dispatch(Csm_Grade_Data_Reduce_Thunk());
     },[])
 
 
@@ -209,89 +212,12 @@ const MainPage = () => {
             <Navigation></Navigation>
             <GraphMainPage Grinder_Datas={Grinder_Data} Laser_Datas={Laser_Data} Dicer_Datas={Dicer_Data} Grinder_Goals_Data={Grinder_Goals_Data} Laser_Goals_Data={Laser_Goals_Data} Dicer_Goals_Data={Dicer_Goals_Data} Division_Goals_Graph_Data={()=>Division_Goals_Graph_Data()}></GraphMainPage>
             <FilterSelect></FilterSelect>
-            {/* <CsmTable ></CsmTable> */}
             {Login_Info.Login_Admin_Access ? <AdminTable></AdminTable> : <BasicTable></BasicTable>}
             { Login_Info.Login_Admin_Access?<AdminFloating></AdminFloating>:<BasicFloating></BasicFloating>}
-            {/* <div>
-                <FloatingTest></FloatingTest>
-            </div> */}
-
-{/* 
-             <div className="FloatingMenu_Container" >
-                        <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={FloatingMenuChecking}>
-                            <MainButton
-                                iconActive={<ImCancelCircle style={{ fontSize: 20, backgroundColor: 'white', color: 'black' }} />}
-                                iconResting={<AiOutlineMenu style={{ fontSize: 20, backgroundColor: 'white', color: 'black' }} />}
-                                size={56}
-                                isOpen={true}
-                                background={'white'}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setFloatingMenuChecking(!FloatingMenuChecking);
-                                }}
-                            ></MainButton>
-
-                    
-                            <ChildButton
-                                 icon={
-                                        <Link to="/Csm_User_Input_Data">
-                                                <div className="Floating1">
-                                                    <div className="distance">이동거리 및 시간 입력</div>
-                                                    <AiFillDatabase style={{ fontSize: 20, backgroundColor: 'white', color: '#375b31' }} />
-                                                    <div className="Select_Count_Container">
-                                                        { Csm_Select_Data.length}
-                                                    </div>
-                                            </div>
-                                            </Link>
-                                    }
-                                    background={'white'}
-                                    size={40}
-                                    
-                    />
-                            { Login_Info.Login_Admin_Access? 
-                                <ChildButton
-                                        icon={
-                                                    <div className="Floating1" onClick={()=>setCsmAddModalISOpen(true)}>
-                                                        <div className="distance">CSM 데이터 추가</div>
-                                                            <MdOutlinePlaylistAdd style={{ fontSize: 20, backgroundColor: 'white', color: 'blue' }} />
-                                                    </div>
-                                            }
-                                            background={'white'}
-                                            size={40}
-                                            
-                        /> : <></>}
-                        { Login_Info.Login_Admin_Access? <ChildButton
-                                            icon={
-                                                        <div className="Floating1" onClick={()=>{HandleExcelDownload()}}>
-                                                            <div className="distance">Excel 다운로드</div>
-                                                                <RiFileExcel2Fill style={{ fontSize: 20, backgroundColor: 'white', color: 'green' }} />
-                                                        </div>
-                                                }
-                                                background={'white'}
-                                                size={40}
-                                                            
-                                    />
-                                : <></>}
-                         { <ChildButton
-                                            icon={
-                                                        <div className="Floating1" onClick={()=>{ScrollUp()}}>
-                                                            <div className="distance">Page Up</div>
-                                                                <ImArrowUp style={{ fontSize: 20, backgroundColor: 'white', color: 'black' }} />
-                                                        </div>
-                                                }
-                                                background={'white'}
-                                                size={40}
-                                                            
-                                    />
-                              }
-                        
-                        </FloatingMenu>
-                    </div> */}
-
+            
           <Modal isOpen={CsmAddModalISOpen} style={customStyles} onRequestClose={()=>setCsmAddModalISOpen(false)} >
                 <CsmAddModal setCsmAddModalISOpen={()=>setCsmAddModalISOpen(false)}></CsmAddModal>
             </Modal>
-            {/* <div style={{marginTop:"100px",marginBottom:"100px"}}></div> */}
             <div style={{paddingBottom:"50px",paddingTop:"50px",background:"#efefef"}}>
 
             </div>

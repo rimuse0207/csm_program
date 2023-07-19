@@ -358,7 +358,7 @@ useEffect(() => {
             <div className="Table_Header_Container">
                 <ul className='Table_Header'>
                     <div className="Main_Header_Table_Container">
-                        <li style={{width:"100px"}}>선택<br />({ })</li>
+                        <li style={{width:"100px"}}>선택<br />({ Csm_Invoice_Select_State.length})</li>
                         <li style={{width:"100px"}}>작업일자</li>
                         <li style={{width:"100px"}} >CSM 장소</li>
                         <li >등급</li>
