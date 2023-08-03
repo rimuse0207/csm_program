@@ -10,15 +10,19 @@ export const initState = {
         csm_basic_data_grade_search_checked:false,
 
         csm_basic_data_csm_number: "",
+        csm_basic_data_csm_number_array:[],
         csm_basic_data_csm_number_search_checked:false,
 
         csm_basic_data_model_number: "",
+        csm_basic_data_model_number_array: [],
         csm_basic_data_model_number_search_checked:false,
 
         csm_basic_data_binds: "",
+        csm_basic_data_binds_array:[],
         csm_basic_data_binds_search_checked:false,
 
         csm_basic_data_custom: "",
+        csm_basic_data_custom_array:[],
         csm_basic_data_custom_search_checked:false,
 
         csm_basic_data_part_number: "",

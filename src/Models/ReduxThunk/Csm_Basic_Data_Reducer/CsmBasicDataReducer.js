@@ -20,30 +20,10 @@ const Csm_Basic_Data_Async = createAsyncAction(
 const Csm_Basic_Data_Getting_Axios = async (Now_Page, Filter_Data,CsmSelectState) => {
     try {
        
-        const Csm_Basic_Data = await request.get(`/CE_Calendar_app_server/tesdt`, {
-            params:{
-               Now_Page: Now_Page,
-                csm_basic_data_state:Filter_Data.csm_basic_data_state,
-                csm_basic_data_grade:Filter_Data.csm_basic_data_grade,
-                csm_basic_data_csm_number:Filter_Data.csm_basic_data_csm_number,
-                csm_basic_data_model_number:Filter_Data.csm_basic_data_model_number,
-                csm_basic_data_binds:Filter_Data.csm_basic_data_binds,
-                csm_basic_data_custom:Filter_Data.csm_basic_data_custom,
-                csm_basic_data_part_number:Filter_Data.csm_basic_data_part_number,
-                csm_user_input_data_writer_id: Filter_Data.csm_user_input_data_writer_id,
-                csm_calendar_publish:Filter_Data.csm_calendar_publish,
-                csm_calendar_apply:Filter_Data.csm_calendar_apply,
-                csm_calendar_entering:Filter_Data.csm_calendar_entering,
-                csm_calendar_ce:Filter_Data.csm_calendar_ce,
-                csm_calendar_custom:Filter_Data.csm_calendar_custom,
-                csm_calendar_pay:Filter_Data.csm_calendar_pay,
-                csm_calendar_finall: Filter_Data.csm_calendar_finall,
-                cms_calendar_all: Filter_Data.cms_calendar_all,
-                csm_hidden_checking:Filter_Data.csm_hidden_checking
-           }
+        const Csm_Basic_Data = await request.post(`/CE_Calendar_app_server/tesdt`, {
+           Now_Page, Filter_Data,CsmSelectState
         });
-        
-        if (Csm_Basic_Data.data.dataSuccess) {
+        if (Csm_Basic_Data.data.dataSuccess && Csm_Basic_Data.data) {
             
         // 선택 데이터 확인
           const GettingData = Csm_Basic_Data.data.test_Rows;

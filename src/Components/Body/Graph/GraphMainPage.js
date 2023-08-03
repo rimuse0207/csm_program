@@ -48,11 +48,12 @@ const GraphMainPageMainDivBox = styled.div`
       position:absolute;
       top:15px;
       display:flex;
-       border: 1px solid lightgray;
+       border-bottom: 1px solid lightgray;
               margin-left: 20px;
               border-radius: 10px;
               left:50px;
               background:#fff;
+              font-weight:bolder;
                ul{
               display:flex;
               justify-content:space-around;
@@ -81,9 +82,10 @@ const GraphMainPageMainDivBox = styled.div`
             width:80%;
             .Show_Grade_Container{
               
-              border: 1px solid lightgray;
+              border-bottom: 1px solid lightgray;
               margin-left: 20px;
               border-radius: 10px;
+              font-weight:bolder;
             }
             ul{
               display:flex;
@@ -284,13 +286,13 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
               <h5>GRINDER</h5>
               <div className="Show_Grade_Container" >
                 <ul>
-                  <li>CDC : {Csm_Grade_Count_State.Grinder_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                  <li>CDC : {Csm_Grade_Count_State?.Grinder_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'CDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>SDC : {Csm_Grade_Count_State.Grinder_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>SDC : {Csm_Grade_Count_State?.Grinder_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'SDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>MDC :  {Csm_Grade_Count_State.Grinder_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>MDC :  {Csm_Grade_Count_State?.Grinder_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'MDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
                   </ul>
@@ -306,13 +308,13 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
               <h5>DICER</h5>
               <div className="Show_Grade_Container" >
                 <ul>
-                  <li>CDC : {Csm_Grade_Count_State.Dicer_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                  <li>CDC : {Csm_Grade_Count_State?.Dicer_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'CDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>SDC : {Csm_Grade_Count_State.Dicer_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>SDC : {Csm_Grade_Count_State?.Dicer_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'SDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>MDC :  {Csm_Grade_Count_State.Dicer_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>MDC :  {Csm_Grade_Count_State?.Dicer_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'MDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
                   </ul>
@@ -329,13 +331,13 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
               <h5>LASER</h5>
               <div className="Show_Grade_Container" >
                 <ul>
-                  <li>CDC : {Csm_Grade_Count_State.Laser_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                  <li>CDC : {Csm_Grade_Count_State?.Laser_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'CDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>SDC : {Csm_Grade_Count_State.Laser_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>SDC : {Csm_Grade_Count_State?.Laser_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'SDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>MDC :  {Csm_Grade_Count_State.Laser_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>MDC :  {Csm_Grade_Count_State?.Laser_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'MDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
                   </ul>
@@ -354,13 +356,13 @@ const GraphMainPage = ({ Grinder_Datas, Laser_Datas, Dicer_Datas,Grinder_Goals_D
             </Modal>
         <div className="Show_ALL_Grade_Container" >
                 <ul>
-                  <li>CDC : {Csm_Grade_Count_State.All_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                  <li>CDC : {Csm_Grade_Count_State?.All_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'CDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>SDC : {Csm_Grade_Count_State.All_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>SDC : {Csm_Grade_Count_State?.All_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'SDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
-                      <li>MDC :  {Csm_Grade_Count_State.All_Grade_Count_Data?.reduce((accumulator, currentValue) => {
+                      <li>MDC :  {Csm_Grade_Count_State?.All_Grade_Count_Data?.reduce((accumulator, currentValue) => {
                      return currentValue.csm_basic_data_grade === 'MDC' ? accumulator + currentValue.count : accumulator + 0
 }, 0)} 건</li>
                   </ul>

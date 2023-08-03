@@ -15,7 +15,9 @@ import { Csm_Baisc_Data_Reduce_Thunk } from "../../../../Models/ReduxThunk/Csm_B
 import { Csm_Register_Data_Reduce_Thunk } from "../../../../Models/ReduxThunk/Csm_Regi_Data_Reducer/CsmRegiDataReducer";
 import Select from "react-select";
 import { User_Select_Data_Reduce_Thunk } from "../../../../Models/ReduxThunk/User_Select_Reducer/UserSelectReducer";
-import { MdOutlineTouchApp } from "react-icons/md";
+import { MdOutlineTouchApp, MdPlaylistAdd } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
+import { toast } from "../../ToastMessage/ToastManager";
 
 const customStyles = {
     content: {
@@ -186,6 +188,42 @@ export const FilterSearchMainPageDivBox = styled.div`
             }
         }
     }
+.FilteringContainer{
+.Select_OR_List_Container{
+        display:block;
+        height:100%;
+        margin-top:0px;
+        .Select_OR_List_Container_Title{
+            width:300px
+           
+        }
+         .Select_OR_List_Container_Sub_Title{
+                border-bottom:1px solid gray;
+                width:80%;
+                margin:0 auto;
+                .Filter_Or_Array_Container{
+                    border:1px dashed gray;
+                    padding:5px;
+                    display:inline-flex;
+                    flex-flow:wrap;
+                    align-items:center;
+                    margin:10px;
+                    border-radius:5px;
+                    .Filter_Or_Array_Container_Icons{
+                        margin-left:10px;
+                        color:red;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        :hover{
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+    }
+}
+    
 `;
 
 ///date-picker 버튼 컴포넌트
@@ -216,6 +254,29 @@ const FilterSelect = ({UseRegisterSearch}) => {
     const User_Select_Options_State = useSelector(state => state.UserSelectReducer.User_Data.User_Select_Options);
     const [FilterSearchModalIsOpen, setFilterSearchModalIsOpen] = useState(false);
     const [SelectMenuTitle, setSelectMenuTitle] = useState(null);
+    const [Prepare_Filter_State, setPrepare_Filter_State] = useState({
+        csm_basic_data_csm_number: [],
+        csm_basic_data_csm_number_search_checked:false,
+
+        csm_basic_data_model_number: [],
+        csm_basic_data_model_number_search_checked:false,
+
+        csm_basic_data_binds: [],
+        csm_basic_data_binds_search_checked:false,
+
+        csm_basic_data_custom: [],
+        csm_basic_data_custom_search_checked:false,
+
+        csm_basic_data_part_number: "",
+        csm_basic_data_part_number_search_checked:false,
+
+        csm_user_input_data_writer_id: null,
+        csm_user_input_data_writer_id_search_checked: false,
+        
+        csm_user_input_start_date: new Date("2023-01-01"),
+        csm_user_input_end_date: new Date(),
+    })
+    
 
 
 
@@ -276,8 +337,77 @@ const FilterSelect = ({UseRegisterSearch}) => {
         dispatch(Csm_Filtering_Reset_Data());
     }
 
-    const handleChange = (e, Select) => {
+    const Handle_Or_Condition_Add = (Select) => {
+        
 
+        if (Select === "csm_basic_data_csm_number") {
+            const data = Csm_Filter_States.csm_basic_data_csm_number;
+            if (!data) {
+                 toast.show({
+                    title: '필터내용을 작성 후 등록바랍니다.',
+                    content: ``,
+                    duration: 6000,
+                    successCheck: false,
+                    })
+                return;
+            }
+            dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_csm_number: "", csm_basic_data_csm_number_array:Csm_Filter_States.csm_basic_data_csm_number_array.concat(data) }))
+        } else if (Select === "csm_basic_data_model_number") {
+            const data = Csm_Filter_States.csm_basic_data_model_number;
+                 if (!data) {
+                 toast.show({
+                    title: '필터내용을 작성 후 등록바랍니다.',
+                    content: ``,
+                    duration: 6000,
+                    successCheck: false,
+                    })
+                return;
+            }
+            dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_model_number: "", csm_basic_data_model_number_array:Csm_Filter_States.csm_basic_data_model_number_array.concat(data) }))
+        } else if (Select === "csm_basic_data_binds") {
+            const data = Csm_Filter_States.csm_basic_data_binds;
+                 if (!data) {
+                 toast.show({
+                    title: '필터내용을 작성 후 등록바랍니다.',
+                    content: ``,
+                    duration: 6000,
+                    successCheck: false,
+                    })
+                return;
+            }
+            dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_binds: "", csm_basic_data_binds_array:Csm_Filter_States.csm_basic_data_binds_array.concat(data) }))
+        } else if (Select === "csm_basic_data_custom") {
+            const data = Csm_Filter_States.csm_basic_data_custom;
+                 if (!data) {
+                 toast.show({
+                    title: '필터내용을 작성 후 등록바랍니다.',
+                    content: ``,
+                    duration: 6000,
+                    successCheck: false,
+                    })
+                return;
+            }
+            dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_custom: "", csm_basic_data_custom_array:Csm_Filter_States.csm_basic_data_custom_array.concat(data) }))
+        }
+    }
+    const Handle_Or_Condition_Delete = (Delete_Data, Select) => {
+          if (Select === "csm_basic_data_csm_number") {
+            
+              dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_csm_number_array: Csm_Filter_States.csm_basic_data_csm_number_array.filter((item) => item === Delete_Data ? "" : item) }));
+        }else  if (Select === "csm_basic_data_model_number") {
+            
+              dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_model_number_array: Csm_Filter_States.csm_basic_data_model_number_array.filter((item) => item === Delete_Data ? "" : item) }));
+        }else  if (Select === "csm_basic_data_binds") {
+            
+              dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_binds_array: Csm_Filter_States.csm_basic_data_binds_array.filter((item) => item === Delete_Data ? "" : item) }));
+        }else  if (Select === "csm_basic_data_custom") {
+            
+              dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_custom_array: Csm_Filter_States.csm_basic_data_custom_array.filter((item) => item === Delete_Data ? "" : item) }));
+        }
+    }
+
+
+    const handleChange = (e, Select) => {
         const Change_Filter_State = { ...Csm_Filter_States, csm_calendar_publish: false, csm_calendar_apply: false, csm_calendar_entering: false, csm_calendar_ce: false, csm_calendar_custom: false, csm_calendar_pay: false, csm_calendar_finall: false,cms_calendar_all:false,csm_hidden_checking:false }
         
 
@@ -285,7 +415,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
             dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_state: e.target.value }))
         } else if (Select === "csm_basic_data_grade") {
             dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_grade: e.target.value }))
-        }else if (Select === "csm_basic_data_csm_number") {
+        } else if (Select === "csm_basic_data_csm_number") {
             dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_csm_number: e.target.value }))
         }else if (Select === "csm_basic_data_model_number") {
             dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_basic_data_model_number: e.target.value }))
@@ -427,40 +557,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
                 <div>
                     <div>
                         
-                        <div className="FilteringContainer">
-                            {Login_Info.Login_Admin_Access ? <>
-                            <div className="SearchInputContainer">
-                                <div className="SearchInputContainerTitle">
-                                    <h4>숨김항목.</h4>
-                                </div>
-                                <div className="SearchInputContainerSubTitle">
-                                    <div className="SearchInputContainerSubTitleFlexDivBox">
-                                        <div className="IconsDivBox">
-                                            <label>
-                                                <BsHandIndexThumbFill></BsHandIndexThumbFill>
-                                            </label>
-                                        </div>
-                                        <div className="InputRadioDivBox">
-                                            <div>
-                                                <input type="checkbox"
-                                                    name="hidden_Checking"
-                                                    value="not_show"
-                                                    id="hidden_Checking_Show"
-                                                    checked={Csm_Filter_States.csm_hidden_checking }
-                                                    onChange={(e) => handleChange(e, "csm_hidden_checking")}></input>
-                                                    <label  htmlFor="hidden_Checking_Show">
-                                                        숨김처리 항목 보기
-                                                    </label>
-                                            </div>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="SearchInputContainer">
-                                
-                            </div></> : <></>}
-                            
+                        <div className="FilteringContainer"> 
                             <div className="SearchInputContainer">
                                 <div className="SearchInputContainerTitle">
                                     <h4>상태.</h4>
@@ -598,9 +695,19 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                 <GrSearchAdvanced></GrSearchAdvanced>
                                             </label>
                                         </div>
+                                        <div style={{ fontSize: "1.5em" }} className="IconsDivBox SearchIcons" onClick={() => {
+                                            Handle_Or_Condition_Add("csm_basic_data_csm_number")
+                                          }}>
+                                            <label>
+                                                <MdPlaylistAdd></MdPlaylistAdd>
+                                            </label>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
+                            
+                         
                             <div className="SearchInputContainer">
                                 <div className="SearchInputContainerTitle">
                                     <h4>장비Model.</h4>
@@ -613,9 +720,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                             </label>
                                         </div>
                                         <div className="InputDivBox">
-                                            
                                                 <input
-                                                    
                                                     type="text"
                                                     placeholder="Ex) DFD**..."
                                                 value={Csm_Filter_States.csm_basic_data_model_number}
@@ -628,9 +733,53 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                 <GrSearchAdvanced></GrSearchAdvanced>
                                             </label>
                                         </div>
+                                        <div style={{ fontSize: "1.5em" }} className="IconsDivBox SearchIcons" onClick={() => {
+                                            Handle_Or_Condition_Add("csm_basic_data_model_number")
+                                          }}>
+                                            <label>
+                                                <MdPlaylistAdd></MdPlaylistAdd>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div className="SearchInputContainer Select_OR_List_Container">
+                                <div className="SearchInputContainerTitle Select_OR_List_Container_Title">
+                                    <h4>CSM번호(LIST)</h4>
+                                </div>
+                                <div className="SearchInputContainerSubTitle Select_OR_List_Container_Sub_Title">
+                                    {Csm_Filter_States.csm_basic_data_csm_number_array.map((item) => {
+                                        return <div className="Filter_Or_Array_Container">
+                                                    <div key={item} className="Filter_Or_Array_Container_Content">
+                                                        {item}
+                                                    </div>
+                                                    <div className="Filter_Or_Array_Container_Icons" onClick={()=>Handle_Or_Condition_Delete(item,"csm_basic_data_csm_number")}>
+                                                        <IoClose></IoClose>
+                                                    </div>
+                                              </div>
+                                          })}
+                                </div>
+                            </div>
+                            
+                         
+                            <div className="SearchInputContainer Select_OR_List_Container">
+                                <div className="SearchInputContainerTitle Select_OR_List_Container_Title">
+                                    <h4>장비Model(LIST)</h4>
+                                </div>
+                                <div className="SearchInputContainerSubTitle Select_OR_List_Container_Sub_Title">
+                                    {Csm_Filter_States.csm_basic_data_model_number_array.map((item) => {
+                                        return <div className="Filter_Or_Array_Container">
+                                                    <div key={item} className="Filter_Or_Array_Container_Content">
+                                                        {item}
+                                                    </div>
+                                                    <div className="Filter_Or_Array_Container_Icons" onClick={()=>Handle_Or_Condition_Delete(item,"csm_basic_data_model_number")}>
+                                                        <IoClose></IoClose>
+                                                    </div>
+                                              </div>
+                                          })}
+                                </div>
+                            </div>
+
                             <div className="SearchInputContainer">
                                 <div className="SearchInputContainerTitle">
                                     <h4>제번.</h4>
@@ -643,9 +792,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                             </label>
                                         </div>
                                         <div className="InputDivBox">
-                                            
                                                 <input
-                                                    
                                                     type="text"
                                                     placeholder="Ex) NLA**.."
                                                 value={Csm_Filter_States.csm_basic_data_binds}
@@ -656,6 +803,13 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                           <div className="IconsDivBox SearchIcons" onClick={()=>HandleClickModalSearchFilter("csm_basic_data_binds")}>
                                             <label>
                                                 <GrSearchAdvanced></GrSearchAdvanced>
+                                            </label>
+                                        </div>
+                                         <div style={{ fontSize: "1.5em" }} className="IconsDivBox SearchIcons" onClick={() => {
+                                            Handle_Or_Condition_Add("csm_basic_data_binds")
+                                          }}>
+                                            <label>
+                                                <MdPlaylistAdd></MdPlaylistAdd>
                                             </label>
                                         </div>
                                         
@@ -674,9 +828,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                             </label>
                                         </div>
                                         <div className="InputDivBox">
-                                            
                                                 <input
-                                            
                                                     type="text"
                                                     placeholder="Ex) AMKOR.."
                                                 value={Csm_Filter_States.csm_basic_data_custom}
@@ -689,10 +841,54 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                 <GrSearchAdvanced></GrSearchAdvanced>
                                             </label>
                                         </div>
+                                         <div style={{ fontSize: "1.5em" }} className="IconsDivBox SearchIcons" onClick={() => {
+                                            Handle_Or_Condition_Add("csm_basic_data_custom")
+                                          }}>
+                                            <label>
+                                                <MdPlaylistAdd></MdPlaylistAdd>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                          
+                               <div className="SearchInputContainer Select_OR_List_Container">
+                                <div className="SearchInputContainerTitle Select_OR_List_Container_Title">
+                                    <h4>제번(LIST)</h4>
+                                </div>
+                                <div className="SearchInputContainerSubTitle Select_OR_List_Container_Sub_Title">
+                                    {Csm_Filter_States.csm_basic_data_binds_array.map((item) => {
+                                        return <div className="Filter_Or_Array_Container">
+                                                    <div key={item} className="Filter_Or_Array_Container_Content">
+                                                        {item}
+                                                    </div>
+                                                    <div className="Filter_Or_Array_Container_Icons" onClick={()=>Handle_Or_Condition_Delete(item,"csm_basic_data_binds")}>
+                                                        <IoClose></IoClose>
+                                                    </div>
+                                              </div>
+                                          })}
+                                </div>
+                            </div>
+                            
+                         
+                            <div className="SearchInputContainer Select_OR_List_Container">
+                                <div className="SearchInputContainerTitle Select_OR_List_Container_Title">
+                                    <h4>최초 납품처(LIST)</h4>
+                                </div>
+                                <div className="SearchInputContainerSubTitle Select_OR_List_Container_Sub_Title">
+                                    {Csm_Filter_States.csm_basic_data_custom_array.map((item) => {
+                                        return <div className="Filter_Or_Array_Container">
+                                                    <div key={item} className="Filter_Or_Array_Container_Content">
+                                                        {item}
+                                                    </div>
+                                                    <div className="Filter_Or_Array_Container_Icons" onClick={()=>Handle_Or_Condition_Delete(item,"csm_basic_data_custom")}>
+                                                        <IoClose></IoClose>
+                                                    </div>
+                                              </div>
+                                          })}
+                                </div>
+                            </div>
+
                             
                             {UseRegisterSearch ? <>
                                 <div className="SearchInputContainer">
@@ -733,13 +929,7 @@ const FilterSelect = ({UseRegisterSearch}) => {
                                                 </label>
                                             </div>
                                             <div className="InputDivBox">
-                                                        {/* <input
-                                                            type="text"
-                                                            placeholder="EX) 홍길동..."
-                                                            value={Csm_Filter_States.csm_user_input_data_writer_id}
-                                                            onChange={(e) => handleChange(e, "csm_user_input_data_writer_id")}
-                                                            
-                                                        ></input> */}
+                                                 
                                                 <Select
                                                     options={User_Select_Options_State}
                                                     onChange={(e) => handleChange(e, "csm_user_input_data_writer_id")}

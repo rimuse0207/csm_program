@@ -249,7 +249,7 @@ const BasicTable = () => {
             </div>
             <div>
                 
-                    {Csm_Data.map(list => {
+                    {Csm_Data?.map(list => {
                         return <ul className={`Table_Body ${list.checked === "false" || list.checked === false ?"":"Checking_Background"}`} key={list.csm_basic_data_csm_key} style={list.checked === "false" || list.checked === false ? {}:{border:"1px solid #368"}}  >
                             
                             <li style={{display:"flex",width:"80px"}}>

@@ -62,7 +62,6 @@ const TableMainPage = () => {
                         });
             }
 
-            console.log(Handle_Invoice_Print_Axios);
 
         } catch (error) {
             console.log(error);

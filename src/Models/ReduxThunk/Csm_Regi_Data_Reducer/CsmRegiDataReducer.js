@@ -19,27 +19,8 @@ const Csm_Basic_Data_Async = createAsyncAction(
 const Csm_Register_Data_Getting_Axios = async (Now_Page, Filter_Data,Csm_Invoice_Select_State) => {
     try {
        
-        const Csm_Regi_Data = await request.get(`/CE_Calendar_app_server/Get_Select_User_Data`, {
-                params: {
-                   csm_basic_data_state:Filter_Data.csm_basic_data_state==="All" ? "":Filter_Data.csm_basic_data_state,
-                    csm_basic_data_grade: Filter_Data.csm_basic_data_grade === "All" ? "" : Filter_Data.csm_basic_data_grade,
-                    csm_basic_data_csm_number:Filter_Data.csm_basic_data_csm_number,
-                    csm_basic_data_model_number:Filter_Data.csm_basic_data_model_number,
-                    csm_basic_data_binds:Filter_Data.csm_basic_data_binds,
-                    csm_basic_data_custom:Filter_Data.csm_basic_data_custom,
-                    csm_basic_data_part_number:Filter_Data.csm_basic_data_part_number,
-                    csm_user_input_data_writer_id:Filter_Data.csm_user_input_data_writer_id,
-                    csm_user_input_start_date:moment(Filter_Data.csm_user_input_start_date).format("YYYY-MM-DD"),
-                    csm_user_input_end_date: moment(Filter_Data.csm_user_input_end_date).format("YYYY-MM-DD"),
-                    csm_calendar_publish:true,
-                    csm_calendar_apply:true,
-                    csm_calendar_entering:true,
-                    csm_calendar_ce:true,
-                    csm_calendar_custom:true,
-                    csm_calendar_pay:Filter_Data.csm_calendar_pay,
-                    csm_calendar_finall: Filter_Data.csm_calendar_finall,
-                    cms_calendar_all:Filter_Data.cms_calendar_all,
-                }
+        const Csm_Regi_Data = await request.post(`/CE_Calendar_app_server/Get_Select_User_Data`, {
+               Now_Page, Filter_Data,Csm_Invoice_Select_State
             });
         
         if (Csm_Regi_Data.data.dataSuccess) {

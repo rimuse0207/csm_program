@@ -208,56 +208,6 @@ const AdminTable = () => {
     const [UpdateModalIsOpen, setUpdateModalIsOpen] = useState(false);
 
 
-    
-  //Calendar 데이터 숨김 처리 
-  const Csm_Data_Hidden_Checking = async () => {
-    try {
-      
-      const Csm_Data_Hidden_Checking_Axios = await request.post('/CE_Calendar_app_server/Csm_Data_Hidden_Checking', {
-        RightMenuClickKeys
-      })
-      if (Csm_Data_Hidden_Checking_Axios.data.dataSuccess) {
-        if (RightMenuClickKeys.csm_basic_data_view_hidde_check === 0) {
-          //숨김처리
-
-          const Change_Csm_Basic_Data = Csm_Data.map((list) => list.csm_basic_data_csm_key === RightMenuClickKeys.csm_basic_data_csm_key ? {...list,csm_basic_data_view_hidde_check:1} : list);
-
-
-          dispatch(Csm_Basic_Data_Change_Checked(Change_Csm_Basic_Data));
-
-          toast.show({
-          title: '숨김처리',
-          content: `CSM 번호 : ${RightMenuClickKeys.csm_basic_data_csm_number}를 숨김 처리 하였습니다.`,
-          duration: 6000,
-          successCheck: true,
-        })
-
-        } else {
-          //숨김처리 취소
-
-          const Change_Csm_Basic_Data = Csm_Data.map((list) => list.csm_basic_data_csm_key === RightMenuClickKeys.csm_basic_data_csm_key ? {...list,csm_basic_data_view_hidde_check:0} : list);
-
-          dispatch(Csm_Basic_Data_Change_Checked(Change_Csm_Basic_Data));
-             toast.show({
-          title: '숨김처리 취소',
-          content: `CSM 번호 : ${RightMenuClickKeys.csm_basic_data_csm_number}를 숨김 처리 하였습니다.`,
-          duration: 6000,
-          successCheck: true,
-        })
-        }
-      }
-
-      Csm_Basic_Data_Update_Modal_Close();
-    } catch (error) {
-      console.log(error);
-       toast.show({
-          title: '에러 발생',
-          content: `IT팀에 문의 바랍니다.`,
-          duration: 6000,
-          successCheck: true,
-        })
-    }
-  }
 
 
   //Calendar 데이터 삭제
@@ -552,7 +502,7 @@ useEffect(() => {
                 </ul>    
             </div>
             <div>
-                    {Csm_Data.map(list => {
+                    {Csm_Data?.map(list => {
                         return <ul className={`Table_Body ${list.checked === "false" || list.checked === false ? "" : "Checking_Background"}`} key={list.csm_basic_data_csm_key} style={list.checked === "false" || list.checked === false ? RightMenuClickKeys?.csm_basic_data_csm_key ? RightMenuClickKeys?.csm_basic_data_csm_key === list.csm_basic_data_csm_key ? {}:{opacity:'0.2'}:{} : { border: "1px solid #368" }}
                             onContextMenu={(e) => handleContextMenu(e, list)} >
                             <div className="Main_Body_Fixed_Container">
@@ -654,7 +604,7 @@ useEffect(() => {
                   { RightMenuClickKeys?.csm_ce_id && RightMenuClickKeys?.csm_ce_id !== "-" ?<li onClick={()=>HandleDeleteCsmCalendar("csm_ce",'Part 수령 삭제')}>Part 수령 삭제</li>:<li style={{opacity:"0.5"}}>Part 수령 삭제</li>}
                   
                   
-                  <li onClick={() => Csm_Data_Hidden_Checking()}>{RightMenuClickKeys?.csm_basic_data_view_hidde_check === 0?"숨김처리":"숨김처리 취소" }</li>
+                  {/* <li onClick={() => Csm_Data_Hidden_Checking()}>{RightMenuClickKeys?.csm_basic_data_view_hidde_check === 0?"숨김처리":"숨김처리 취소" }</li> */}
                               <li onClick={()=>setUpdateModalIsOpen(true)}>데이터 수정하기</li>
                               <li onClick={()=>handleDeleteData()}>데이터 삭제하기</li>
                             </ul>
