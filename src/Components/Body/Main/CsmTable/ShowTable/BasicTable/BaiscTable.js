@@ -14,6 +14,8 @@ import Pay from '../../Pay/Pay';
 import { Csm_Select_Add_Data, Csm_Select_Delete_Data } from '../../../../../../Models/Csm_Select_Reducer/CsmSelectReducer';
 import { Loader_Check_For_False, Loader_Check_For_True } from '../../../../../../Models/LoaderCheckReducer/LoaderCheckReducer';
 import PageNation from '../../../PageNation/PageNation';
+import HoverRevealText from './HoverRevealText';
+
 const TestMainPage = styled.div`
     background-color: #efefef;
 
@@ -76,7 +78,20 @@ const TestMainPage = styled.div`
             background-color: #fff;
             padding: 5px;
             font-weight: 500;
+
+            .Text_Hidden_Close {
+                display: none;
+            }
+
+            .Text_Hidden_Open:hover {
+                .Text_Hidden_Close {
+                    position: fixed;
+                    background-color: #fff;
+                    padding: 5px;
+                }
+            }
         }
+
         :first-child {
             text-align: center;
         }
@@ -103,7 +118,7 @@ const BasicTable = () => {
     const Csm_Data_LoadingCheck = useSelector(state => state.CsmBasicDataReducer.Csm_Basic_Data_State.loading);
     const totalPages = useSelector(state => state.CsmBasicDataReducer.Csm_Basic_Data_State.All_Count);
     const PageNumbers = useSelector(state => state.Csm_PageNation_Reducer.PageNumbers);
-
+    const [customisHovered, setcustomisHovered] = useState(false);
     const Border_Color_Checking = data => {
         if (data.csm_publish_id) {
             if (data.csm_apply_id) {
@@ -278,7 +293,9 @@ const BasicTable = () => {
                             <li>{list.csm_basic_data_csm_number}</li>
                             <li>{list.csm_basic_data_model_number}</li>
                             <li>{list.csm_basic_data_binds}</li>
-                            <li>{list.csm_basic_data_custom}</li>
+                            <li>
+                                <HoverRevealText text={list.csm_basic_data_custom} />
+                            </li>
                             <li style={{ width: '100px' }}>
                                 {/* 발행 */}
                                 <Publish data={list}></Publish>
@@ -305,7 +322,9 @@ const BasicTable = () => {
                             </li>
                             <li style={{ width: '100px', paddingLeft: '10px' }}>{list.csm_basic_data_working_hours} 시간</li>
                             <li style={{ width: '100px' }}>{list.csm_basic_data_working_count} 명</li>
-                            <li>{list.csm_basic_data_etc}</li>
+                            <li>
+                                <HoverRevealText text={list.csm_basic_data_etc} />
+                            </li>
                         </ul>
                     );
                 })}

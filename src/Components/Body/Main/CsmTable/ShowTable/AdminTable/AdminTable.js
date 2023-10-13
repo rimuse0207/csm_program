@@ -19,6 +19,7 @@ import { toast } from '../../../../ToastMessage/ToastManager';
 import { request } from '../../../../../../APIs';
 import Modal from 'react-modal';
 import CsmUpdateModal from '../../../MainModal/CsmUpdateModal';
+import HoverRevealText from '../BasicTable/HoverRevealText';
 
 const customStyles = {
     content: {
@@ -533,7 +534,9 @@ const AdminTable = () => {
                                 <li>{list.csm_basic_data_csm_number}</li>
                                 <li>{list.csm_basic_data_model_number}</li>
                                 <li>{list.csm_basic_data_binds}</li>
-                                <li>{list.csm_basic_data_custom}</li>
+                                <li>
+                                    <HoverRevealText text={list.csm_basic_data_custom} />
+                                </li>
                                 <li>{list?.name}</li>
                             </div>
                             <div className="Sub_Body_Fixed_Container">
@@ -598,7 +601,9 @@ const AdminTable = () => {
                                 </li>
                                 <li>{list.csm_basic_data_working_hours} 시간</li>
                                 <li>{list.csm_basic_data_working_count} 명</li>
-                                <li>{list.csm_basic_data_etc}</li>
+                                <li>
+                                    <HoverRevealText text={list.csm_basic_data_etc} />
+                                </li>
                             </div>
                         </ul>
                     );
