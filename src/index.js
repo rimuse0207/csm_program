@@ -28,6 +28,5 @@ root.render(
         <PersistGate loading={null} persistor={persistor}></PersistGate>
         {/* <App /> */}
         <Routerpage></Routerpage>
-        
     </Provider>
 );

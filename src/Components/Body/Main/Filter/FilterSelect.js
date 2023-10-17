@@ -841,7 +841,28 @@ const FilterSelect = ({ UseRegisterSearch }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="SearchInputContainer"></div>
+                            <div className="SearchInputContainer">
+                                <div className="SearchInputContainerTitle">
+                                    <h4>작업자 이름.</h4>
+                                </div>
+                                <div className="SearchInputContainerSubTitle">
+                                    <div className="SearchInputContainerSubTitleFlexDivBox">
+                                        <div className="IconsDivBox">
+                                            <label>
+                                                <BsFillPencilFill></BsFillPencilFill>
+                                            </label>
+                                        </div>
+                                        <div className="InputDivBox">
+                                            <Select
+                                                options={User_Select_Options_State}
+                                                onChange={e => handleChange(e, 'csm_user_input_data_writer_id')}
+                                                isClearable={true}
+                                                placeholder="이름 또는 Email을 검색.."
+                                            ></Select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="SearchInputContainer">
                                 <div className="SearchInputContainerTitle">
                                     <h4>CSM번호.</h4>
@@ -1124,28 +1145,7 @@ const FilterSelect = ({ UseRegisterSearch }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="SearchInputContainer">
-                                        <div className="SearchInputContainerTitle">
-                                            <h4>작업자 이름.</h4>
-                                        </div>
-                                        <div className="SearchInputContainerSubTitle">
-                                            <div className="SearchInputContainerSubTitleFlexDivBox">
-                                                <div className="IconsDivBox">
-                                                    <label>
-                                                        <BsFillPencilFill></BsFillPencilFill>
-                                                    </label>
-                                                </div>
-                                                <div className="InputDivBox">
-                                                    <Select
-                                                        options={User_Select_Options_State}
-                                                        onChange={e => handleChange(e, 'csm_user_input_data_writer_id')}
-                                                        isClearable={true}
-                                                        placeholder="이름 또는 Email을 검색.."
-                                                    ></Select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div className="SearchInputContainer"></div>
                                     <div className="SearchInputContainer">
                                         <div className="SearchInputContainerTitle">
                                             <h4>시작날짜.</h4>
