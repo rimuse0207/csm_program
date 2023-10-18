@@ -177,11 +177,12 @@ const GraphMainPage = ({
     Laser_Goals_Data,
     Dicer_Goals_Data,
     Division_Goals_Graph_Data,
+    Select_Years,
 }) => {
     const Login_Info = useSelector(state => state.LoginInfoDataReducer.Infomation);
     const Csm_Grade_Count_State = useSelector(state => state.Csm_Grade_Data_Reducer.Csm_Grade_Count_Data_State);
 
-    const [Select_Years, setSelect_Years] = useState(moment().format('YYYY'));
+    // const [Select_Years, setSelect_Years] = useState(moment().format('YYYY'));
     const [Goals_Change_Modal_IsOpen, setGoals_Change_Modal_IsOpen] = useState(false);
     const [Select_Teams, setSelect_Teams] = useState(null);
 
@@ -398,7 +399,7 @@ const GraphMainPage = ({
                 <GoalsChangeModal
                     Goals_Change_Modal_Close={() => Goals_Change_Modal_Close()}
                     Select_Teams={Select_Teams}
-                    Select_Years={Select_Years}
+                    Select_Years={moment(Select_Years).format('YYYY')}
                     Division_Goals_Graph_Data={() => Division_Goals_Graph_Data()}
                 ></GoalsChangeModal>
             </Modal>

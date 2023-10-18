@@ -18,6 +18,7 @@ import { User_Select_Data_Reduce_Thunk } from '../../../../Models/ReduxThunk/Use
 import { MdOutlineTouchApp, MdPlaylistAdd } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
 import { toast } from '../../ToastMessage/ToastManager';
+import { Csm_Grade_Data_Reduce_Thunk } from '../../../../Models/ReduxThunk/Csm_Grade_Data_Reducer/Csn_Grade_Data_Reducer';
 
 const customStyles = {
     content: {
@@ -659,6 +660,7 @@ const FilterSelect = ({ UseRegisterSearch }) => {
     const HandleSubmitFilterDataApply = () => {
         dispatch(Csm_Baisc_Data_Reduce_Thunk(1, Csm_Filter_States, CsmSelectState));
         dispatch(Csm_Register_Data_Reduce_Thunk(1, Csm_Filter_States, Csm_Invoice_Select_State));
+        dispatch(Csm_Grade_Data_Reduce_Thunk(Csm_Filter_States));
     };
 
     useEffect(() => {
