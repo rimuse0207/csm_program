@@ -471,6 +471,8 @@ const FilterSelect = ({ UseRegisterSearch }) => {
             dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_user_input_start_date: e }));
         } else if (Select === 'csm_user_input_end_date') {
             dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_user_input_end_date: e }));
+        } else if (Select === 'csm_parts') {
+            dispatch(Csm_Filtering_Change_Data({ ...Csm_Filter_States, csm_parts: e.target.value }));
         } else if (Select === 'csm_calendar_publish') {
             if (e.target.checked) {
                 // 선택
@@ -679,16 +681,11 @@ const FilterSelect = ({ UseRegisterSearch }) => {
                                 </div>
                                 <div className="SearchInputContainerSubTitle">
                                     <div className="SearchInputContainerSubTitleFlexDivBox">
-                                        <div className="IconsDivBox">
-                                            <label>
-                                                <BsHandIndexThumbFill></BsHandIndexThumbFill>
-                                            </label>
-                                        </div>
                                         <div className="InputRadioDivBox">
                                             <div>
                                                 <input
                                                     type="radio"
-                                                    name="state"
+                                                    name="part"
                                                     value="All"
                                                     id="state_All"
                                                     checked={Csm_Filter_States.csm_basic_data_state === 'All'}
@@ -699,7 +696,7 @@ const FilterSelect = ({ UseRegisterSearch }) => {
                                             <div>
                                                 <input
                                                     type="radio"
-                                                    name="state"
+                                                    name="part"
                                                     value="Open"
                                                     id="state_Open"
                                                     checked={Csm_Filter_States.csm_basic_data_state === 'Open'}
@@ -710,13 +707,55 @@ const FilterSelect = ({ UseRegisterSearch }) => {
                                             <div>
                                                 <input
                                                     type="radio"
-                                                    name="state"
+                                                    name="part"
                                                     value="Close"
                                                     id="state_Close"
                                                     checked={Csm_Filter_States.csm_basic_data_state === 'Close'}
                                                     onChange={e => handleChange(e, 'csm_basic_data_state')}
                                                 ></input>
                                                 <label htmlFor="state_Close">Close</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="SearchInputContainerTitle">
+                                    <h4>Part</h4>
+                                </div>
+                                <div className="SearchInputContainerSubTitle">
+                                    <div className="SearchInputContainerSubTitleFlexDivBox">
+                                        <div className="InputRadioDivBox">
+                                            <div>
+                                                <input
+                                                    type="radio"
+                                                    name="state"
+                                                    value="All"
+                                                    id="part_All"
+                                                    checked={Csm_Filter_States.csm_parts === 'All'}
+                                                    onChange={e => handleChange(e, 'csm_parts')}
+                                                ></input>
+                                                <label htmlFor="part_All">All</label>
+                                            </div>
+                                            <div>
+                                                <input
+                                                    type="radio"
+                                                    name="state"
+                                                    value="없음"
+                                                    id="part_not"
+                                                    checked={Csm_Filter_States.csm_parts === '없음'}
+                                                    onChange={e => handleChange(e, 'csm_parts')}
+                                                ></input>
+                                                <label htmlFor="part_not">없음</label>
+                                            </div>
+                                            <div>
+                                                <input
+                                                    type="radio"
+                                                    name="state"
+                                                    value="있음"
+                                                    id="part_yes"
+                                                    checked={Csm_Filter_States.csm_parts === '있음'}
+                                                    onChange={e => handleChange(e, 'csm_parts')}
+                                                ></input>
+                                                <label htmlFor="part_yes">있음</label>
                                             </div>
                                         </div>
                                     </div>

@@ -37,6 +37,8 @@ export const initState = {
         csm_user_input_start_date: new Date('2023-01-01'),
         csm_user_input_end_date: new Date(),
 
+        csm_parts: 'All',
+
         csm_calendar_publish: false,
         csm_calendar_apply: false,
         csm_calendar_entering: false,
